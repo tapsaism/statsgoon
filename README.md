@@ -1,1 +1,2 @@
-# statsgoon - Lean Agile Hockey Analytics Platform Solution Suite
+# Statsgoon
+### Lean Agile Hockey Analytics Platform Solution Suite
