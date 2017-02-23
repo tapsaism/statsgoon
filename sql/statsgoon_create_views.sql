@@ -1,7 +1,4 @@
-
-*/
-
-/** VIEWS **/
+** VIEWS **/
 
 -- 1. V_PlayerStatsAll
 	-- 1.2. V_PlayerStatsLatest
@@ -11,6 +8,8 @@
 			-- 1.3.1.1 V_stats
 				-- 1.3.1.1.1 getPlayerData()
 	-- 1.4. V_PlayersAllGames
+-- 2. V_HockeyGmPeriods
+	-- 2.1 V_PeriodGamesLeft
 
 
 /** DROP VIEWS **/
@@ -23,6 +22,8 @@
 --DROP VIEW v_gamesperperiod;
 --DROP VIEW V_PlayersAllGames;
 --DROP VIEW V_PlayerStatsAll;
+--DROP VIEW V_PeriodGamesLeft;
+--DROP VIEW V_HockeyGmPeriods;
 
 /** V_PlayerStatsAll **/
 
@@ -422,6 +423,79 @@ FROM (
 LEFT JOIN nhlScheduleGameDayIndex awayGames
 ON awayGames.awayTeam = players.team;
 
+/** V_HockeyGmPeriods **/
+
+/** DESC: Hockeygmperiods with start and end dates **/
+
+/** DEPENDENCIES: nhlScheduleGameDayIndex **/
+
+--DROP VIEW V_HockeyGmPeriods
+
+CREATE OR REPLACE VIEW V_HockeyGmPeriods
+
+AS
+
+select
+hockeygmperiod,
+min(gamedaydate) AS startDate,
+max(gamedaydate) AS endDAte
+from nhlschedulegamedayindex
+
+where hockeygmperiod is not null
+
+group by hockeygmperiod;
+
+/** V_PeriodGamesLeft **/
+
+/** DESC: Returns all of the games team has left on the currect period, if the date is between periods the next period games are returned **/
+
+/** DEPENDENCIES: nhlScheduleGameDayIndex, V_HockeyGmPeriods **/
+
+--DROP VIEW V_PeriodGamesLeft
+
+CREATE OR REPLACE VIEW V_PeriodGamesLeft
+
+AS
+
+SELECT
+gamedaydate,
+hockeygmperiod,
+team,
+game
+FROM (
+
+SELECT
+gamedaydate,
+hockeygmperiod,
+awayteam AS team,
+1 AS game
+FROM nhlScheduleGameDayIndex
+
+WHERE hockeygmperiod IS NOT NULL
+
+UNION
+
+SELECT
+gamedaydate,
+hockeygmperiod,
+hometeam AS team,
+1 AS game
+FROM nhlScheduleGameDayIndex
+
+) AS allgames
+
+WHERE hockeygmperiod IS NOT NULL
+AND hockeygmperiod = (SELECT
+						hockeygmperiod
+						FROM V_hockeygmperiods
+						WHERE (current_date BETWEEN startdate AND enddate)
+						OR (current_date < startdate AND current_date < enddate)
+						ORDER BY startdate
+						LIMIT 1
+					)
+AND gamedaydate > current_date;
+
+
 SELECT COUNT(*) AS row_count, 'getPlayerData' AS view_name FROM getPlayerData()
 
 UNION
@@ -452,25 +526,10 @@ UNION
 
 SELECT COUNT(*) AS row_count, 'V_PlayerStatsAll' AS view_name FROM V_PlayerStatsAll;
 
+UNION
 
--- 1. V_PlayerStatsAll
-	-- 1.2. V_PlayerStatsLatest
-		-- 1.2.1 V_stats
-	-- 1.3. V_PlayerStatsDaily
-		-- 1.3.1 v
-			-- 1.3.1.1 V_stats
-				-- 1.3.1.1.1 getPlayerData()
-	-- 1.4. V_PlayersAllGames
+SELECT COUNT(*) AS row_count, 'V_HockeyGmPeriods' AS view_name FROM V_HockeyGmPeriods
 
-/**
+UNION
 
-DROP FUNCTION getPlayerData();
-DROP VIEW V_stats;
-DROP VIEW V_PlayerStatsLastGames;
-DROP VIEW V_PlayerStatsLatest;
-DROP VIEW V_PlayerStatsDaily;
-DROP VIEW v_gamesperperiod;
-DROP VIEW V_PlayersAllGames;
-DROP VIEW V_PlayerStatsAll;
-
-**/
+SELECT COUNT(*) AS row_count, 'V_PeriodGamesLeft' AS view_name FROM V_PeriodGamesLeft;
