@@ -1,0 +1,17 @@
+{
+  "name": "statsgoonhockeyreferencescraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.2",
+    "fs-readfile-promise": "^3.0.0",
+    "request": "^2.81.0"
+  }
+}

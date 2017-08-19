@@ -1,0 +1,21 @@
+{
+  "name": "statsgoon-player-data-micro-service",
+  "version": "0.1.0",
+  "description": "AWS Lambda microservice for statsgoob player data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "statsgoon",
+    "aws",
+    "lambda",
+    "hockey"
+  ],
+  "author": "olli iivonen / statsgoon enterprises",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "pg-promise": "^6.3.5"
+  }
+}
