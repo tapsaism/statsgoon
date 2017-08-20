@@ -21,29 +21,23 @@ module.exports.scrapeGameStats = (html) => {
   ps.map(i => {
     let p = rawhtml('p')[i]
     p.children.forEach((element,i) => {
-/*
-      console.log('--------------------------')
-      console.log('current prev:' + prev)
-      console.log('current value: ' + rawhtml(element).text().replace('\r','').trim())
-      console.log('current value: ' + rawhtml(element).text().trim().length)
-*/
+/
       switch (prev) {
         case "Position":
-          position = rawhtml(element).text().substring(4,2)
+          position = rawhtml(element).text().substring(1,3).replace(/(\r\n|\n|\r)/gm,"")
         case "Born:":
           DOB = rawhtml(element).text()
         case "Current salary":
           currentSalary = rawhtml(element).text()
         case  "Current cap hit":
           currentCapHit = rawhtml(element).text()
+        default:
+          null
       }
 
       prev = rawhtml(element).text().trim() === '' ? prev :  rawhtml(element).text()
-    //  console.log('new prev:' + prev)
     })
   })
-
-//  console.log(DOB + position + currentSalary + currentCapHit)
 
   rawhtml('tr').map(index => {
 

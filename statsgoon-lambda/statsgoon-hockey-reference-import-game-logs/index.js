@@ -3,9 +3,9 @@
 const aws = require('aws-sdk');
 const pgp = require('pg-promise')();
 
-let dbConnString = process.env.DB_CONN_STR;
+const dbConnString = process.env.DB_CONN_STR;
 
-let db = pgp(dbConnString);
+const db = pgp(dbConnString);
 
 const s3 = new aws.S3({ apiVersion: '2006-03-01' });
 
@@ -26,14 +26,14 @@ exports.s3handler = (event, context) => {
                       'salary', 'caphit', 'rank', 'measure', 'measure_value']
     let values = []
 
-    var cs = new pgp.helpers.ColumnSet(
+    const cs = new pgp.helpers.ColumnSet(
       columns,
       {table: 'hockeyreference_player_game_logs'}
     )
 
     const rows = data.Body.toString('utf-8').split("\n");
 
-    console.log('Starting to loop file contents');
+    console.info('Starting to loop file contents');
 
     rows.forEach((row, i) => {
 
