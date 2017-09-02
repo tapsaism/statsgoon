@@ -18,6 +18,9 @@ exports.getDataByRequestType = (event, context, callback) => {
       console.info('SUCCESS:', data)
       let response = {
         "statusCode": 200,
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        },
         "body": JSON.stringify(data)
         }
       callback(null, response)
