@@ -29,7 +29,7 @@ let queries = {
                                 gamesplayed,
                                 hgm_avg as points_avg,
                                 hgm_total as points_total,
-                                hgm_value as value,
+                                hgm_value::integer as player_value,
                                 points as points_daily,
                                 game_played
                                 FROM V_PlayerStatsDaily WHERE player IN ($1:csv)
@@ -39,7 +39,8 @@ let queries = {
                                 team,
                                 SUM(game) games
                                 FROM V_PeriodGamesLeft
-                                GROUP BY team`
+                                GROUP BY team
+                                ORDER BY games DESC`
 }
 
 module.exports.getQueryByRequestType = (requestType) => {
