@@ -40,7 +40,9 @@ let queries = {
                                 SUM(game) games
                                 FROM V_PeriodGamesLeft
                                 GROUP BY team
-                                ORDER BY games DESC`
+                                ORDER BY games DESC`,
+
+  'team/schedule-current-period': `SELECT * FROM v_teams_schedule_with_opponents_current_period`
 }
 
 module.exports.getQueryByRequestType = (requestType) => {
