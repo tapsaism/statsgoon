@@ -103,8 +103,8 @@ exports.s3handler = (event, context, callback) => {
               //console.log(i);
 
               //if there are more than 3 hyphens on the row, the filter it out
-              if ((row.match(/-/g) || []).length > 5)
-                return;
+            //  if ((row.match(/-/g) || []).length > 5)
+            //    return;
               //add to goalies
               if (position === 'goalie') {
                 goalies += row;
@@ -126,6 +126,8 @@ exports.s3handler = (event, context, callback) => {
             let goaliesFile = `gm_g_${fileDate}.txt`;
             let forwardsFile = `gm_f_${fileDate}.txt`;
             let defensemenFile = `gm_d_${fileDate}.txt`;
+
+            console.log(forwards)
 
             console.log(goaliesFile, forwardsFile, defensemenFile);
 

@@ -61,31 +61,33 @@ exports.s3handler = (event, context) => {
 
               let vals = row.split('|');
 
+              console.log(vals.length)
+
               let valJson = {};
-              if ((row.match(/-/g) || []).length < 5) {
+              if (vals.length > 20) {
                 if (playerType === 'g') {
                   valJson = {
                     insertdate : new Date().toISOString(),
                     filedate : vals[1],
                     team : vals[3],
                     name : vals[2],
-                    games : vals[5],
-                    goals : vals[6],
-                    assists : vals[7],
-                    points : vals[8],
-                    wins : vals[9],
-                    losses : vals[10],
-                    ot_losses : vals[11],
-                    saves : vals[12],
-                    allowed_goals : vals[13],
-                    shutouts : vals[14],
-                    penalties : vals[15],
-                    three_stars : vals[16],
-                    two_stars : vals[17],
-                    one_stars : vals[18],
-                    hgm_avg : vals[19],
-                    hgm_total : vals[20],
-                    hgm_value : vals[21]
+                    games : vals[5].replace('-',0),
+                    goals : vals[6].replace('-',0),
+                    assists : vals[7].replace('-',0),
+                    points : vals[8].replace('-',0),
+                    wins : vals[9].replace('-',0),
+                    losses : vals[10].replace('-',0),
+                    ot_losses : vals[11].replace('-',0),
+                    saves : vals[12].replace('-',0),
+                    allowed_goals : vals[13].replace('-',0),
+                    shutouts : vals[14].replace('-',0),
+                    penalties : vals[15].replace('-',0),
+                    three_stars : vals[16].replace('-',0),
+                    two_stars : vals[17].replace('-',0),
+                    one_stars : vals[18].replace('-',0),
+                    hgm_avg : vals[19].replace('-',0),
+                    hgm_total : vals[20].replace('-',0),
+                    hgm_value : vals[21].replace('-',0)
                   }
                   values.push(valJson);
                 }
@@ -94,32 +96,32 @@ exports.s3handler = (event, context) => {
                     insertdate : new Date().toISOString(),
                     filedate : vals[1],
                     team : vals[3],
-                    name : vals[2],
-                    games : vals[5],
-                    goals : vals[6],
-                    assists : vals[7],
-                    points : vals[8],
-                    shg_goals : vals[9],
-                    shg_assists : vals[10],
-                    gw_goals : vals[11],
-                    ot_goals : vals[12],
-                    shots : vals[13],
-                    hits : vals[14],
-                    blocks : vals[15],
-                    fo_wins : vals[16],
-                    fo_losses : vals[17],
-                    plusminus : vals[18],
-                    penaltymin : vals[19],
-                    three_stars : vals[20],
-                    two_stars : vals[21],
-                    one_stars : vals[22],
-                    hgm_avg : vals[23],
-                    hgm_total : vals[24],
+                    name : vals[2].replace('-',0),
+                    games : vals[5].replace('-',0),
+                    goals : vals[6].replace('-',0),
+                    assists : vals[7].replace('-',0),
+                    points : vals[8].replace('-',0),
+                    shg_goals : vals[9].replace('-',0),
+                    shg_assists : vals[10].replace('-',0),
+                    gw_goals : vals[11].replace('-',0),
+                    ot_goals : vals[12].replace('-',0),
+                    shots : vals[13].replace('-',0),
+                    hits : vals[14].replace('-',0),
+                    blocks : vals[15].replace('-',0),
+                    fo_wins : vals[16].replace('-',0),
+                    fo_losses : vals[17].replace('-',0),
+                    plusminus : vals[18].replace('-',0),
+                    penaltymin : vals[19].replace('-',0),
+                    three_stars : vals[20].replace('-',0),
+                    two_stars : vals[21].replace('-',0),
+                    one_stars : vals[22].replace('-',0),
+                    hgm_avg : vals[23].replace('-',0),
+                    hgm_total : vals[24].replace('-',0),
                     hgm_value : vals[25]
                   }
                   values.push(valJson);
                 }
-            }
+          }
           });
 
             let query = pgp.helpers.insert(values, cs);

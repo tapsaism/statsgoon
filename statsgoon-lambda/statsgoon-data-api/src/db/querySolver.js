@@ -13,13 +13,16 @@ let queries = {
                                   ORDER BY position, playername`,
 
   'player/games-left':            `SELECT
-                                  gamedaydate,
-                                  COUNT(*)
-                                  FROM V_PlayersAllGames
-                                  WHERE player IN ($1:csv)
-                                  AND gamedaydate >= current_date
-                                  GROUP BY gamedaydate
-                                  ORDER BY gamedaydate`,
+                                   date,
+                                   opponent_acrm,
+                                   player,
+                                   awaygame,
+                                   homegame,
+                                   game
+                                   FROM v_teams_schedule_with_opponents_current_period games
+                                   INNER JOIN All_Players player
+                                   ON games.team = player.team
+                                   WHERE player IN ($1:csv)`,
 
   'player/daily-stats':           `SELECT
                                   filedate,
