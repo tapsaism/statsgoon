@@ -1,11 +1,14 @@
 import React from 'react'
 import { Grid, Button } from 'semantic-ui-react'
+import Axios from 'axios'
+
+import Constants from './Constants.js'
 import TeamSelector from './statsgoonparams/ParamsTeamSelector.js'
 import MeasureSelector from './statsgoonparams/ParamsMeasureSelector.js'
 import PosSelector from './statsgoonparams/ParamsPositionSelector.js'
 import ValueField from './statsgoonparams/ParamsValueField.js'
-import Axios from 'axios'
-import Constants from './Constants.js'
+import PeriodSelector from './statsgoonparams/ParamsPeriodSelector.js'
+
 
 class StatsgoonParams extends React.Component {
 
@@ -21,8 +24,10 @@ class StatsgoonParams extends React.Component {
       selectedGoalie: Constants.getConstants('positions').goalie,
       selectedDmen: Constants.getConstants('positions').dmen,
       selectedFwd: Constants.getConstants('positions').fwd,
+      selectedPeriod: 'alltime',
       paramsTeams: [],
-      maxValue: null
+      maxValue: null,
+
     }
   }
 
@@ -32,6 +37,7 @@ class StatsgoonParams extends React.Component {
   handleChangeGoalies = (e, { value }) => {this.setState({selectedGoalie: value })}
   handleChangeDmen = (e, { value }) => this.setState({selectedDmen: value })
   handleChangeFwd = (e, { value }) => this.setState({selectedFwd: value })
+  handleStatPeriodChange = (e, { value }) => this.setState({selectedPeriod: value })
 
   valueChange = (event) => {this.setState({maxValue: event.target.value})}
 
@@ -76,7 +82,7 @@ class StatsgoonParams extends React.Component {
 
   render() {
     return (
-    <Grid columns={5} stackable>
+    <Grid columns={6} stackable>
       <Grid.Row>
         <Grid.Column>
           <TeamSelector
@@ -97,6 +103,12 @@ class StatsgoonParams extends React.Component {
             goalie = {this.state.selectedGoalie}
             dmen = {this.state.selectedDmen}
             fwd = {this.state.selectedFwd}
+          />
+        </Grid.Column>
+        <Grid.Column>
+          <PeriodSelector
+          statPeriod = {this.state.selectedPeriod}
+          handleStatPeriodChange = {this.handleStatPeriodChange}
           />
         </Grid.Column>
         <Grid.Column>
