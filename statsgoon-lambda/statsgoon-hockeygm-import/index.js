@@ -96,7 +96,7 @@ exports.s3handler = (event, context) => {
                     insertdate : new Date().toISOString(),
                     filedate : vals[1],
                     team : vals[3],
-                    name : vals[2].replace('-',0),
+                    name : vals[2],
                     games : vals[5].replace('-',0),
                     goals : vals[6].replace('-',0),
                     assists : vals[7].replace('-',0),
