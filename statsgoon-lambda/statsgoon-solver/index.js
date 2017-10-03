@@ -4,10 +4,11 @@ const runSolver = require('./runSolver.js');
 
 exports.lambdaSolver = (event, context, callback) => {
 
-  console.log(event.ContentType);
-  console.log(event.body);
+  console.log(event.ContentType)
+  console.log(event.body)
 
-  let filter = event.teams;
+  let teams = event.teams
+  let season = event.season
   let userConfig = {
     'value' : event.value,
     'measure' : event.measure,
@@ -16,9 +17,9 @@ exports.lambdaSolver = (event, context, callback) => {
     'fwd' : event.fwd
   };
 
-  console.log(filter,userConfig);
+  console.log(teams,season,userConfig);
 
-  runSolver.executeSolver(filter, userConfig, function(result){
+  runSolver.executeSolver(teams, season, userConfig, function(result){
     console.log('Result Ready!');
     console.log(result);
     callback(null, result);

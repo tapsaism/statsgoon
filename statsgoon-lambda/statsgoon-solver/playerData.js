@@ -14,19 +14,22 @@ let dbConnString = process.env.DB_CONN_STR;
 let db = pgp(dbConnString);
 
 
-module.exports.getData = function(filter, callback) {
+module.exports.getData = function(teams, season, callback) {
 
   let variables = {};
   let binaries = {};
 
-  let teams = [];
+  let teamsArray = [];
 
   //convert the filter to array for the pgp
-  teams.push(filter);
+  teamsArray.push(teams);
 
-  let query = `SELECT * FROM getPlayerData() WHERE player IS NOT NULL AND team IN ($1:csv)`;
+  let query = `SELECT * FROM solver_data()
+                  WHERE player IS NOT NULL
+                  AND team IN ($1:csv)
+                  AND season = '${season}'`;
 
-  db.query(query, teams)
+  db.query(query, teamsArray)
     .then(function(data) {
 
       data.forEach(function(element){

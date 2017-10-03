@@ -3,7 +3,7 @@ const async = require('async');
 const hockeySolver = require('./hockeySolver');
 const playerData = require('./playerData');
 
-module.exports.executeSolver = function (filter, userConfig, callback){
+module.exports.executeSolver = function (teams, season, userConfig, callback){
 
 async.waterfall([
   getData,
@@ -14,7 +14,7 @@ async.waterfall([
 
 function getData(callback) {
   console.log('Fetching data for solver');
-  playerData.getData(filter,function(variables,binaries) {
+  playerData.getData(teams,season,function(variables,binaries) {
     callback(null,variables,binaries);
   });
 };
