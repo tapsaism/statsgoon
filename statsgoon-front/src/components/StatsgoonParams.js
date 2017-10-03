@@ -24,7 +24,7 @@ class StatsgoonParams extends React.Component {
       selectedGoalie: Constants.getConstants('positions').goalie,
       selectedDmen: Constants.getConstants('positions').dmen,
       selectedFwd: Constants.getConstants('positions').fwd,
-      selectedPeriod: 'alltime',
+      selectedSeason: '',
       paramsTeams: [],
       maxValue: null,
 
@@ -37,7 +37,7 @@ class StatsgoonParams extends React.Component {
   handleChangeGoalies = (e, { value }) => {this.setState({selectedGoalie: value })}
   handleChangeDmen = (e, { value }) => this.setState({selectedDmen: value })
   handleChangeFwd = (e, { value }) => this.setState({selectedFwd: value })
-  handleStatPeriodChange = (e, { value }) => this.setState({selectedPeriod: value })
+  seasonChange = (e, { value }) => this.setState({selectedSeason: value })
 
   valueChange = (event) => {this.setState({maxValue: event.target.value})}
 
@@ -51,6 +51,7 @@ class StatsgoonParams extends React.Component {
 
     let solverParams = {
           "teams": this.state.selectedTeams,
+          "season": this.state.selectedSeason,
           "measure":this.state.selectedMeasure,
           "def": this.state.selectedDmen,
           "fwd": this.state.selectedFwd,
@@ -60,6 +61,7 @@ class StatsgoonParams extends React.Component {
 
     Axios.post(Constants.getConstants('solverApiUrl'),solverParams)
     .then(response =>  {
+      console.log(response.data)
       let players = Object.keys(response.data).map((key, index) => response.data[key] === 1 ? key : '')
 
       let params = { filter : players.filter(player => player !== '') }
@@ -85,6 +87,11 @@ class StatsgoonParams extends React.Component {
     <Grid columns={6} stackable>
       <Grid.Row>
         <Grid.Column>
+          <PeriodSelector
+          seasonChange = {this.seasonChange}
+          />
+        </Grid.Column>
+        <Grid.Column>
           <TeamSelector
             teamChange={this.teamChange}
           />
@@ -103,12 +110,6 @@ class StatsgoonParams extends React.Component {
             goalie = {this.state.selectedGoalie}
             dmen = {this.state.selectedDmen}
             fwd = {this.state.selectedFwd}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <PeriodSelector
-          statPeriod = {this.state.selectedPeriod}
-          handleStatPeriodChange = {this.handleStatPeriodChange}
           />
         </Grid.Column>
         <Grid.Column>
