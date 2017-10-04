@@ -27,7 +27,8 @@ module.exports.getData = function(teams, season, callback) {
   let query = `SELECT * FROM solver_data()
                   WHERE player IS NOT NULL
                   AND team IN ($1:csv)
-                  AND season = '${season}'`;
+                  AND season = '${season}'
+                  AND value is not null`;
 
   db.query(query, teamsArray)
     .then(function(data) {
