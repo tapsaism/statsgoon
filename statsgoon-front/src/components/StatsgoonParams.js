@@ -62,7 +62,7 @@ class StatsgoonParams extends React.Component {
     Axios.post(Constants.getConstants('solverApiUrl'),solverParams)
     .then(response =>  {
       console.log(response.data)
-      let players = Object.keys(response.data).map((key, index) => response.data[key] === 1 ? key : '')
+      let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key]) === 1 ? key : '')
 
       let params = {
         filter : [
