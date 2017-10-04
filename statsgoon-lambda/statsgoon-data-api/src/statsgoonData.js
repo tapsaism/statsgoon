@@ -4,12 +4,10 @@ const db = require('./db/db.js')
 
 module.exports.getData = (filter, requestType) => {
 
-  let filters = []
-  filters.push(filter);
+  console.log(filter)
 
   let query = queries.getQueryByRequestType(requestType)
-
   console.info(query)
 
-  return db.query(query, filters)
+  return db.query(query, filter)
 }

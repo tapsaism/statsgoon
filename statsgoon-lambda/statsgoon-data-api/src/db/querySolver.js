@@ -3,9 +3,10 @@
 let queries = {
   'player/all-stats':             `SELECT
                                   *
-                                  FROM getPlayerData()
+                                  FROM solver_data()
                                   WHERE player IS NOT NULL
-                                  AND playername IN ($1:csv)`,
+                                  AND playername IN ($1:csv)
+                                  AND season = $2`,
 
   'player/all-players':           `SELECT
                                   *
@@ -25,18 +26,11 @@ let queries = {
                                    WHERE player IN ($1:csv)`,
 
   'player/daily-stats':           `SELECT
-                                  filedate,
-                                  player,
-                                  team,
-                                  position,
-                                  gamesplayed,
-                                  hgm_avg as points_avg,
-                                  hgm_total as points_total,
-                                  hgm_value::integer as player_value,
-                                  points as points_daily,
-                                  game_played
-                                  FROM V_PlayerStatsDaily WHERE player IN ($1:csv)
-                                  ORDER BY filedate`,
+                                  	*
+                                    FROM daily_stats()
+                                    WHERE player IN ($1:csv)
+                                    AND SEASON = $2
+                                    ORDER BY filedate`,
 
   'team/games-left':              `SELECT
                                   team,
