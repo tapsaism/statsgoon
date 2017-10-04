@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Statistic, Table } from 'semantic-ui-react'
+import { Container, Statistic, Table, Divider } from 'semantic-ui-react'
 
 class StatsgoonSummary extends React.Component {
 
@@ -24,10 +24,6 @@ class StatsgoonSummary extends React.Component {
       </Container>
       <Container textAlign='center'>
         <Statistic size='small'
-          value={stats.reduce((sum,data) => (sum + data.points_total),0)}
-          label='Total points'
-        />
-        <Statistic size='small'
           value={Math.round(stats.reduce((sum,data) => (sum + data.points_avg),0))}
           label='Daily points'
         />
@@ -50,6 +46,7 @@ class StatsgoonSummary extends React.Component {
         <Container textAlign='center'>
           <h3>Team</h3>
         </Container>
+        <Divider />
         <Container>
         <Table basic='very'>
         <Table.Body>
@@ -84,8 +81,9 @@ class StatsgoonSummary extends React.Component {
   getStatistics = (stats,games) => {
     return (
           <Container>
-            {this.getSummary(stats,games)}
             {this.getTeam(stats)}
+            <Divider />
+            {this.getSummary(stats,games)}
           </Container>
     )
   }

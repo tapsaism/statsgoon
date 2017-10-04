@@ -64,7 +64,12 @@ class StatsgoonParams extends React.Component {
       console.log(response.data)
       let players = Object.keys(response.data).map((key, index) => response.data[key] === 1 ? key : '')
 
-      let params = { filter : players.filter(player => player !== '') }
+      let params = {
+        filter : [
+            players.filter(player => player !== ''),
+            this.state.selectedSeason
+          ]
+      }
 
       this.props.loaderStatusUpdate('active','Drawing charts')
 
