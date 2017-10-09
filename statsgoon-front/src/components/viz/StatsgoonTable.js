@@ -11,7 +11,7 @@ class StatsgoonTable extends React.Component {
     return latestStatsSorted.map(stat => {
       return(
       <Table.Row key={stat.player_name}>
-        <Table.Cell>{stat.team}</Table.Cell>
+        <Table.Cell>{stat.team_acronym}</Table.Cell>
         <Table.Cell>{stat.position}</Table.Cell>
         <Table.Cell>{stat.playername}</Table.Cell>
         <Table.Cell>{stat.value}</Table.Cell>

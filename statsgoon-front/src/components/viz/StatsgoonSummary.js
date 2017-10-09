@@ -10,7 +10,7 @@ class StatsgoonSummary extends React.Component {
       return(
         <Statistic size='mini'
           value={players[index].playername}
-          label={players[index].position + ' - ' + players[index].value + ' - ' + players[0].points_avg}
+          label={players[index].team_acronym+ ' - ' + players[index].position + ' - ' + players[index].value + ' - ' + players[index].points_avg}
         />
       )
     }
