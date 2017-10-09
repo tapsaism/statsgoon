@@ -5,3 +5,4 @@ temp/
 *.zip
 build/
 public/
+index-test.js
