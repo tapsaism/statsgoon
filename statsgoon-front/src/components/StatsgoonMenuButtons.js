@@ -13,6 +13,7 @@ class StatsgoonMenuButtons extends React.Component {
     <Button.Group>
       <Button basic onClick={() => this.handleClick('solver')}>Solver</Button>
       <Button basic onClick={() => this.handleClick('schedule')}>Schedule</Button>
+      <Button basic onClick={() => this.handleClick('players')}>Players</Button>
     </Button.Group>
     <Divider />
     </Container>

@@ -8,8 +8,6 @@ import Table from './viz/StatsgoonTable'
 import Summary from './viz/StatsgoonSummary'
 import Games from './viz/StatsgoonGamesLeft'
 
-
-
 class StatsgoonResults extends React.Component {
 
   getTabPanes = () => {

@@ -8,7 +8,7 @@ export default class StatsgoonPeriodSelector extends Component {
     super(props)
 
     this.state = {
-      placeholder : 'Select season',
+      placeholder : 'Season',
       seasonList : [
         {text: '2016-2017', value: '2016-2017'},
         {text: '2017-2018', value: '2017-2018'}

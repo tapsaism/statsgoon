@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react'
+import Axios from 'axios'
 
+import Constants from './Constants.js'
 import StatsgoonHeader from './components/StatsgoonHeader'
 import StatsgoonParams from './components/StatsgoonParams'
 import StatsgoonResults from './components/StatsgoonResults'
 import StatsgoonSchedule from './components/StatsgoonSchedule'
 import StatsgoonMenuButtons from './components/StatsgoonMenuButtons'
+import StatsgoonPlayerSelector from './components/StatsgoonPlayerSelector'
 
 class Statsgoon extends Component {
 
@@ -23,8 +26,49 @@ class Statsgoon extends Component {
     }
   }
 
+  optimize = (solverParams) => {
+
+    this.loaderStatusUpdate('active','Running solver')
+
+    Axios.post(Constants.getConstants('solverApiUrl'),solverParams)
+    .then(response =>  {
+      console.log(response.data)
+      let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key]) === 1 ? key : '')
+
+      let params = {
+        filter : [
+            players.filter(player => player !== ''),
+            solverParams.season
+          ]
+      }
+
+      this.drawCharts(params)
+
+    })
+    .catch(error => error)
+  }
+
+  dailyStats = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/daily-stats',params)
+  latestStats = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/all-stats',params)
+  gamesLeft = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/games-left',params)
+
+  drawCharts = (params) => {
+    console.log(params)
+    this.loaderStatusUpdate('active','Drawing charts')
+
+    Axios.all([this.dailyStats(params), this.latestStats(params), this.gamesLeft(params)])
+    .then(Axios.spread((daily,latest,games) => {
+      let dataset = {'dailyStats': daily.data, 'latestStats': latest.data, 'gamesLeft': games.data}
+      this.chartDataUpdate(dataset)
+      this.loaderStatusUpdate('disabled')
+    }))
+    .catch(error =>{
+      console.log(error)
+      this.loaderStatusUpdate('disabled')
+    })
+  }
+
   setVisibleContent = (selectedContent) => {
-    console.log('Button Click!')
     this.setState({visibleContent: selectedContent})
   }
   chartDataUpdate = (dataset) => {
@@ -34,8 +78,10 @@ class Statsgoon extends Component {
                          gamesLeft: dataset.gamesLeft})
   }
   loaderStatusUpdate = (value, content) => {
-    this.setState({loaderStatus: value})
-    this.setState({loaderContent: content})
+    this.setState({
+      loaderStatus: value,
+      loaderContent: content
+    })
   }
 
   getSchedule = () => <StatsgoonSchedule />
@@ -44,8 +90,7 @@ class Statsgoon extends Component {
     return (
       <Container>
       <StatsgoonParams
-        chartDataUpdate={this.chartDataUpdate}
-        loaderStatusUpdate={this.loaderStatusUpdate}
+        optimize={this.optimize}
       />
       <StatsgoonResults
         dailyStats={this.state.dailyStats}
@@ -58,7 +103,36 @@ class Statsgoon extends Component {
     )
   }
 
-  getVisibleContent = (selectedContent) => selectedContent === 'solver' ? this.getSolver() : this.getSchedule()
+  getPlayerSelector = () => {
+    return(
+      <Container>
+        <StatsgoonPlayerSelector
+          drawCharts={this.drawCharts}
+        />
+        <StatsgoonResults
+          dailyStats={this.state.dailyStats}
+          latestStats={this.state.latestStats}
+          gamesLeft={this.state.gamesLeft}
+          loaderStatus={this.state.loaderStatus}
+          loaderContent={this.state.loaderContent}
+        />
+      </Container>
+    )
+  }
+
+  getVisibleContent = (selectedContent) => {
+
+    switch(selectedContent) {
+      case 'solver':
+        return this.getSolver()
+      case 'schedule':
+        return this.getSchedule()
+      case 'players':
+        return this.getPlayerSelector()
+      default:
+        this.getSolver()
+    }
+  }
 
   render() {
   return(

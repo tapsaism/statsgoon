@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-import Constants from './Constants.js'
+import Constants from '../Constants.js'
 import { Table, Loader, Container } from 'semantic-ui-react'
 
 class StatsgoonSchedule extends React.Component {

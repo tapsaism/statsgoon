@@ -1,14 +1,12 @@
 import React from 'react'
 import { Grid, Button } from 'semantic-ui-react'
-import Axios from 'axios'
 
-import Constants from './Constants.js'
 import TeamSelector from './statsgoonparams/ParamsTeamSelector.js'
 import MeasureSelector from './statsgoonparams/ParamsMeasureSelector.js'
 import PosSelector from './statsgoonparams/ParamsPositionSelector.js'
 import ValueField from './statsgoonparams/ParamsValueField.js'
 import PeriodSelector from './statsgoonparams/ParamsPeriodSelector.js'
-
+import Constants from '../Constants.js'
 
 class StatsgoonParams extends React.Component {
 
@@ -41,50 +39,17 @@ class StatsgoonParams extends React.Component {
 
   valueChange = (event) => {this.setState({maxValue: event.target.value})}
 
-  dailyStats = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/daily-stats',params)
-  latestStats = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/all-stats',params)
-  gamesLeft = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/games-left',params)
-
-  optimize = () => {
-
-    this.props.loaderStatusUpdate('active','Running solver')
-
+  runSolver = () => {
     let solverParams = {
           "teams": this.state.selectedTeams,
-          "season": this.state.selectedSeason,
           "measure":this.state.selectedMeasure,
           "def": this.state.selectedDmen,
           "fwd": this.state.selectedFwd,
           "goalie": this.state.selectedGoalie,
-          "value": this.state.maxValue
-        }
-
-    Axios.post(Constants.getConstants('solverApiUrl'),solverParams)
-    .then(response =>  {
-      console.log(response.data)
-      let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key]) === 1 ? key : '')
-
-      let params = {
-        filter : [
-            players.filter(player => player !== ''),
-            this.state.selectedSeason
-          ]
-      }
-
-      this.props.loaderStatusUpdate('active','Drawing charts')
-
-      Axios.all([this.dailyStats(params), this.latestStats(params), this.gamesLeft(params)])
-      .then(Axios.spread((daily,latest,games) => {
-        let dataset = {'dailyStats': daily.data, 'latestStats': latest.data, 'gamesLeft': games.data}
-        this.props.chartDataUpdate(dataset)
-        this.props.loaderStatusUpdate('disabled')
-      }))
-      .catch(error =>{
-        this.props.loaderStatusUpdate('disabled')
-      })
-
-    })
-    .catch(error => error)
+          "value": this.state.maxValue,
+          "season": this.state.selectedSeason
+    }
+    this.props.optimize(solverParams)
   }
 
   render() {
@@ -123,7 +88,7 @@ class StatsgoonParams extends React.Component {
           />
         </Grid.Column>
         <Grid.Column>
-          <Button fluid basic color='blue' type='submit' onClick={this.optimize}>Optimize!</Button>
+          <Button fluid basic color='blue' type='submit' onClick={this.runSolver}>Optimize!</Button>
         </Grid.Column>
       </Grid.Row>
     </Grid>

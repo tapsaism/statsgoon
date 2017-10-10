@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-import Constants from '../Constants.js'
+import Constants from '../../Constants.js'
 import { Dropdown } from 'semantic-ui-react'
 
 class StatsgoonParamsTeamSelector extends React.Component {
@@ -10,8 +10,8 @@ class StatsgoonParamsTeamSelector extends React.Component {
     super(props)
 
     this.state = {
-      status : 'Loading Teams',
-      teamList : []
+      teamList: [],
+      loading: true
     }
   }
 
@@ -26,15 +26,21 @@ class StatsgoonParamsTeamSelector extends React.Component {
     Axios.get(Constants.getConstants('dataApiUrl')+'team/games-left')
       .then((response) =>  {
         let teams = response.data.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
-        this.setState({status: 'Teams'})
-        this.setState({teamList: teams})
+        this.setState({
+          teamList: teams,
+          loading: false
+        })
       })
       .catch((error) => error);
   }
 
   render() {
     return (
-      <Dropdown placeholder={this.state.status} onChange={this.props.teamChange} fluid selection multiple options={this.state.teamList} />
+      <Dropdown
+        loading = {this.state.loading}
+        placeholder='Teams'
+        onChange={this.props.teamChange}
+        fluid selection multiple options={this.state.teamList} />
     )
   }
 }
