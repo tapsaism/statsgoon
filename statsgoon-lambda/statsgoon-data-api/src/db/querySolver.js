@@ -10,8 +10,7 @@ let queries = {
 
   'player/all-players':           `SELECT
                                   *
-                                  FROM getPlayerData()
-                                  ORDER BY position, playername`,
+                                  FROM D_PLAYER`,
 
   'player/games-left':            `SELECT
                                    date,
