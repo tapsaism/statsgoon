@@ -30,7 +30,7 @@ class StatsgoonResults extends React.Component {
     )
   }
 
-  getFidgetSpinner = () => <Loader className={this.props.loaderStatus} content={this.props.loaderContent}/>
+  getFidgetSpinner = () => <Container><Loader className={this.props.loaderStatus} content={this.props.loaderContent}/></Container>
 
   showContent = () => this.props.loaderStatus === 'disabled' && this.props.dailyStats.length ? this.getResults() : this.getFidgetSpinner()
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios'
-import { Button, Grid, Dropdown, Container } from 'semantic-ui-react'
+import { Button, Grid, Dropdown, Container, Divider } from 'semantic-ui-react'
 
 import Constants from '../Constants.js'
 import Utils from '../utils/StatsgoonUtils.js'
@@ -65,40 +65,41 @@ class StatsgoonPlayerSelector extends React.Component {
   render () {
     return(
      <Container>
-     <Grid columns={4} stackable>
-       <Grid.Row>
-         <Grid.Column>
-          <Dropdown
-            search={true}
-            multiple={true}
-            loading={this.state.loading}
-            placeholder='Goalie'
-            onChange={this.goalieChange}
-            fluid selection options={this.state.goalies} />
-         </Grid.Column>
-         <Grid.Column>
-          <Dropdown
-            search={true}
-            multiple={true}
-            loading={this.state.loading}
-            placeholder='Defense'
-            onChange={this.dmenChange}
-            fluid selection options={this.state.dmen} />
-         </Grid.Column>
-         <Grid.Column>
-          <Dropdown
-            search={true}
-            multiple={true}
-            loading={this.state.loading}
-            placeholder='Forward'
-            onChange={this.forwardChange}
-            fluid selection options={this.state.forwards} />
-         </Grid.Column>
-         <Grid.Column>
-         <Button fluid basic color='blue' type='submit' onClick={this.getPlayerStats}>Get stats!</Button>
-         </Grid.Column>
-       </Grid.Row>
-      </Grid>
+       <Grid columns={4} stackable>
+         <Grid.Row>
+           <Grid.Column>
+            <Dropdown
+              search={true}
+              multiple={true}
+              loading={this.state.loading}
+              placeholder='Goalie'
+              onChange={this.goalieChange}
+              fluid selection options={this.state.goalies} />
+           </Grid.Column>
+           <Grid.Column>
+            <Dropdown
+              search={true}
+              multiple={true}
+              loading={this.state.loading}
+              placeholder='Defense'
+              onChange={this.dmenChange}
+              fluid selection options={this.state.dmen} />
+           </Grid.Column>
+           <Grid.Column>
+            <Dropdown
+              search={true}
+              multiple={true}
+              loading={this.state.loading}
+              placeholder='Forward'
+              onChange={this.forwardChange}
+              fluid selection options={this.state.forwards} />
+           </Grid.Column>
+           <Grid.Column>
+           <Button fluid basic color='blue' type='submit' onClick={this.getPlayerStats}>Get stats!</Button>
+           </Grid.Column>
+         </Grid.Row>
+        </Grid>
+      <Divider hidden />
      </Container>
   )
   }

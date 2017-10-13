@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid, Button, Container, Divider } from 'semantic-ui-react'
 
 import TeamSelector from './statsgoonparams/ParamsTeamSelector.js'
 import MeasureSelector from './statsgoonparams/ParamsMeasureSelector.js'
@@ -54,44 +54,47 @@ class StatsgoonParams extends React.Component {
 
   render() {
     return (
-    <Grid columns={6} stackable>
-      <Grid.Row>
-        <Grid.Column>
-          <PeriodSelector
-          seasonChange = {this.seasonChange}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <TeamSelector
-            teamChange={this.teamChange}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <MeasureSelector
-            measures={this.state.measures}
-            measureChange={this.measureChange}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <PosSelector
-            handleChangeGoalies={this.handleChangeGoalies}
-            handleChangeDmen={this.handleChangeDmen}
-            handleChangeFwd={this.handleChangeFwd}
-            goalie = {this.state.selectedGoalie}
-            dmen = {this.state.selectedDmen}
-            fwd = {this.state.selectedFwd}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <ValueField
-            valueChange = {this.valueChange}
-          />
-        </Grid.Column>
-        <Grid.Column>
-          <Button fluid basic color='blue' type='submit' onClick={this.runSolver}>Optimize!</Button>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+    <Container>
+      <Grid columns={6} stackable>
+        <Grid.Row>
+          <Grid.Column>
+            <PeriodSelector
+            seasonChange = {this.seasonChange}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <TeamSelector
+              teamChange={this.teamChange}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <MeasureSelector
+              measures={this.state.measures}
+              measureChange={this.measureChange}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <PosSelector
+              handleChangeGoalies={this.handleChangeGoalies}
+              handleChangeDmen={this.handleChangeDmen}
+              handleChangeFwd={this.handleChangeFwd}
+              goalie = {this.state.selectedGoalie}
+              dmen = {this.state.selectedDmen}
+              fwd = {this.state.selectedFwd}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <ValueField
+              valueChange = {this.valueChange}
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <Button fluid basic color='blue' type='submit' onClick={this.runSolver}>Optimize!</Button>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    <Divider hidden />
+    </Container>
   )}
 }
 
