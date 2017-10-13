@@ -15,13 +15,13 @@ class StatsgoonParams extends React.Component {
     super(props)
 
     this.state = {
-      measures: Constants.getConstants('measures'),
+      measures: Constants.measures,
       teamSelectorStatus: 'Loading teams',
       selectedTeams: [],
       selectedMeasure: null,
-      selectedGoalie: Constants.getConstants('positions').goalie,
-      selectedDmen: Constants.getConstants('positions').dmen,
-      selectedFwd: Constants.getConstants('positions').fwd,
+      selectedGoalie: Constants.positions.goalie,
+      selectedDmen: Constants.positions.dmen,
+      selectedFwd: Constants.positions.fwd,
       selectedSeason: '',
       paramsTeams: [],
       maxValue: null,
@@ -32,10 +32,10 @@ class StatsgoonParams extends React.Component {
   teamChange = (e, { value }) => this.setState({selectedTeams: value})
   measureChange = (e, { value }) => this.setState({selectedMeasure: value})
 
-  handleChangeGoalies = (e, { value }) => {this.setState({selectedGoalie: value })}
-  handleChangeDmen = (e, { value }) => this.setState({selectedDmen: value })
-  handleChangeFwd = (e, { value }) => this.setState({selectedFwd: value })
-  seasonChange = (e, { value }) => this.setState({selectedSeason: value })
+  handleChangeGoalie = (value) => {this.setState({selectedGoalie: value.value })}
+  handleChangeDmen = (value) => {this.setState({selectedDmen: value.value })}
+  handleChangeFwd = (value) => this.setState({selectedFwd: value.value })
+  seasonChange = (value) => this.setState({selectedSeason: value.value })
 
   valueChange = (event) => {this.setState({maxValue: event.target.value})}
 
@@ -75,7 +75,7 @@ class StatsgoonParams extends React.Component {
           </Grid.Column>
           <Grid.Column>
             <PosSelector
-              handleChangeGoalies={this.handleChangeGoalies}
+              handleChangeGoalie={this.handleChangeGoalie}
               handleChangeDmen={this.handleChangeDmen}
               handleChangeFwd={this.handleChangeFwd}
               goalie = {this.state.selectedGoalie}

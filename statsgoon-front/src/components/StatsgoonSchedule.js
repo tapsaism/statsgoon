@@ -24,7 +24,7 @@ class StatsgoonSchedule extends React.Component {
 
   loadSchedule = () => {
 
-    Axios.get(Constants.getConstants('dataApiUrl')+'team/schedule-current-period')
+    Axios.get(Constants.dataApiUrl+'team/schedule-current-period')
       .then((response) =>  {
         this.setState({scheduleData: response.data, loaderStatus: 'disabled'})
         this.getTableData(response.data,this.getTeams(response.data))

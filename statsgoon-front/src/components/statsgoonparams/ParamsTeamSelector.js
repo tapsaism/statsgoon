@@ -23,7 +23,7 @@ class StatsgoonParamsTeamSelector extends React.Component {
 
   loadTeamSelector = () => {
 
-    Axios.get(Constants.getConstants('dataApiUrl')+'team/games-left')
+    Axios.get(Constants.dataApiUrl+'team/games-left')
       .then((response) =>  {
         let teams = response.data.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
         this.setState({

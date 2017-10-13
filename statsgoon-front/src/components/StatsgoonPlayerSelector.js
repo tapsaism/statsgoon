@@ -36,7 +36,7 @@ class StatsgoonPlayerSelector extends React.Component {
 
   loadPlayers = () => {
 
-    Axios.get(Constants.getConstants('dataApiUrl')+'player/all-players')
+    Axios.get(Constants.dataApiUrl+'player/all-players')
       .then((response) =>  {
         this.setState({
           goalies: this.getPlayersByPosition(response.data,'GOA').sort(Utils.dynamicSort('text')),

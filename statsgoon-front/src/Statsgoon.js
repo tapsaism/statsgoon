@@ -30,17 +30,16 @@ class Statsgoon extends Component {
 
     this.loaderStatusUpdate('active','Running solver')
 
-    Axios.post(Constants.getConstants('solverApiUrl'),solverParams)
+    Axios.post(Constants.solverApiUrl,solverParams)
     .then(response =>  {
-      console.log(response.data)
+
       let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key]) === 1 ? key : '')
 
       let params = {
         filter : [
             players.filter(player => player !== ''),
             solverParams.season
-          ]
-      }
+          ]}
 
       this.drawCharts(params)
 
@@ -48,12 +47,11 @@ class Statsgoon extends Component {
     .catch(error => error)
   }
 
-  dailyStats = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/daily-stats',params)
-  latestStats = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/all-stats',params)
-  gamesLeft = (params) => Axios.post(Constants.getConstants('dataApiUrl')+'player/games-left',params)
+  dailyStats = (params) => Axios.post(Constants.dataApiUrl+'player/daily-stats',params)
+  latestStats = (params) => Axios.post(Constants.dataApiUrl+'player/all-stats',params)
+  gamesLeft = (params) => Axios.post(Constants.dataApiUrl+'player/games-left',params)
 
   drawCharts = (params) => {
-    console.log(params)
     this.loaderStatusUpdate('active','Drawing charts')
 
     Axios.all([this.dailyStats(params), this.latestStats(params), this.gamesLeft(params)])
@@ -63,7 +61,6 @@ class Statsgoon extends Component {
       this.loaderStatusUpdate('disabled')
     }))
     .catch(error =>{
-      console.log(error)
       this.loaderStatusUpdate('disabled')
     })
   }

@@ -5,9 +5,9 @@ const constants = {
   solverApiUrl : 'https://zegyactk64.execute-api.us-east-1.amazonaws.com/statsgoon/solver/solve',
 
   positions : {
-    goalie : '1',
-    dmen : '2',
-    fwd : '3'
+    goalie : 1,
+    dmen : 2,
+    fwd : 3
   },
 
   measures : [
@@ -20,9 +20,6 @@ const constants = {
       { key: 'last_3_total', text: 'Last 3 games', value: 'last_3_total' },
       { key: 'median', text: 'Median', value: 'median' }
   ]
-
 }
 
-module.exports.getConstants = (type) => {
-  return constants[type]
-}
+export default constants
