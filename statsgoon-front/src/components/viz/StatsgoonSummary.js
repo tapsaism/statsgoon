@@ -28,7 +28,7 @@ class StatsgoonSummary extends React.Component {
           label='Daily points'
         />
         <Statistic size='small'
-          value={stats.reduce((sum,data) => (sum + parseInt(data.value)),0)}
+          value={stats.reduce((sum,data) => (sum + parseInt(data.value,10)),0)}
           label='Team Value'
         />
         <Statistic size='small'

@@ -24,6 +24,7 @@ class StatsgoonMultipleLineCharts extends React.Component {
           padding={{ top: 10, bottom: 20, left: 30, right: 20 }}
           theme={VictoryTheme.material}
           height={100}
+          domain={{y: this.props.yDomain}}
       >
       <VictoryAxis
           scale='time'

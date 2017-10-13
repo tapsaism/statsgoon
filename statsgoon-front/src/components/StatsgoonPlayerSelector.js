@@ -12,9 +12,9 @@ class StatsgoonPlayerSelector extends React.Component {
     super(props)
 
     this.state = {
-      goalies: [],
-      dmen: [],
-      forwards: [],
+      goalies: [{key: 'Clear selection', text: 'Clear selection', value: 'Clear selection'}],
+      dmen: [{key: 'Clear selection', text: 'Clear selection', value: 'Clear selection'}],
+      forwards: [{key: 'Clear selection', text: 'Clear selection', value: 'Clear selection'}],
       selectedGoalies: [],
       selectedDmen: [],
       selectedForwards: [],
@@ -26,9 +26,31 @@ class StatsgoonPlayerSelector extends React.Component {
     this.loadPlayers()
   }
 
-  goalieChange = (e, { value }) => this.setState({selectedGoalies: value})
-  dmenChange = (e, { value }) => this.setState({selectedDmen: value})
-  forwardChange = (e, { value }) => this.setState({selectedForwards: value})
+  goalieChange = (e, { value }) => {
+    if (value[value.length-1] === 'Clear selection')
+      this.setState({selectedGoalies: []})
+    else {
+      this.setState({selectedGoalies: value})
+    }
+
+  }
+
+  dmenChange = (e, { value }) => {
+    if (value[value.length-1] === 'Clear selection')
+      this.setState({selectedDmen: []})
+    else {
+      this.setState({selectedDmen: value})
+    }
+
+  }
+  forwardChange = (e, { value }) => {
+    if (value[value.length-1] === 'Clear selection')
+      this.setState({selectedForwards: []})
+    else {
+      this.setState({selectedForwards: value})
+    }
+
+  }
 
   getDropdownElement = (player) => ({key: player.name, text: player.team +'-'+ player.name, value: player.name})
 
@@ -39,9 +61,9 @@ class StatsgoonPlayerSelector extends React.Component {
     Axios.get(Constants.dataApiUrl+'player/all-players')
       .then((response) =>  {
         this.setState({
-          goalies: this.getPlayersByPosition(response.data,'GOA').sort(Utils.dynamicSort('text')),
-          dmen: this.getPlayersByPosition(response.data,'DEF').sort(Utils.dynamicSort('text')),
-          forwards: this.getPlayersByPosition(response.data,'FWD').sort(Utils.dynamicSort('text')),
+          goalies: this.state.goalies.concat(this.getPlayersByPosition(response.data,'GOA').sort(Utils.dynamicSort('text'))),
+          dmen: this.state.dmen.concat(this.getPlayersByPosition(response.data,'DEF').sort(Utils.dynamicSort('text'))),
+          forwards: this.state.forwards.concat(this.getPlayersByPosition(response.data,'FWD').sort(Utils.dynamicSort('text'))),
           loading: false
         })
       })
@@ -71,6 +93,7 @@ class StatsgoonPlayerSelector extends React.Component {
             <Dropdown
               search={true}
               multiple={true}
+              value = {this.state.selectedGoalies}
               loading={this.state.loading}
               placeholder='Goalie'
               onChange={this.goalieChange}
@@ -80,6 +103,7 @@ class StatsgoonPlayerSelector extends React.Component {
             <Dropdown
               search={true}
               multiple={true}
+              value = {this.state.selectedDmen}
               loading={this.state.loading}
               placeholder='Defense'
               onChange={this.dmenChange}
@@ -89,6 +113,7 @@ class StatsgoonPlayerSelector extends React.Component {
             <Dropdown
               search={true}
               multiple={true}
+              value = {this.state.selectedForwards}
               loading={this.state.loading}
               placeholder='Forward'
               onChange={this.forwardChange}

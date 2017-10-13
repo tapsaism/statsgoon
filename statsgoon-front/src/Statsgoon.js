@@ -33,7 +33,7 @@ class Statsgoon extends Component {
     Axios.post(Constants.solverApiUrl,solverParams)
     .then(response =>  {
 
-      let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key]) === 1 ? key : '')
+      let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key],10) === 1 ? key : '')
 
       let params = {
         filter : [

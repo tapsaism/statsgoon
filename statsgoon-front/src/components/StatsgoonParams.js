@@ -32,12 +32,12 @@ class StatsgoonParams extends React.Component {
   teamChange = (e, { value }) => this.setState({selectedTeams: value})
   measureChange = (e, { value }) => this.setState({selectedMeasure: value})
 
-  handleChangeGoalie = (value) => {this.setState({selectedGoalie: value.value })}
-  handleChangeDmen = (value) => {this.setState({selectedDmen: value.value })}
+  handleChangeGoalie = (value) => this.setState({selectedGoalie: value.value })
+  handleChangeDmen = (value) => this.setState({selectedDmen: value.value })
   handleChangeFwd = (value) => this.setState({selectedFwd: value.value })
-  seasonChange = (value) => this.setState({selectedSeason: value.value })
+  seasonChange = (e, {value}) => this.setState({selectedSeason: value })
 
-  valueChange = (event) => {this.setState({maxValue: event.target.value})}
+  valueChange = (event) => this.setState({maxValue: event.target.value})
 
   runSolver = () => {
     let solverParams = {
