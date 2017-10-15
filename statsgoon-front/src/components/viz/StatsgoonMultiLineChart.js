@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryChart, VictoryLine, VictoryTheme, VictoryAxis, VictoryGroup, VictoryLegend} from 'victory'
+import * as Victory from 'victory'
 import Utils from '../../utils/StatsgoonUtils.js'
 
 class StatsgoonMultiLineChart extends React.Component {
@@ -16,14 +16,14 @@ class StatsgoonMultiLineChart extends React.Component {
 
   getPlayers = (data) => [...new Set(data.map(stat => stat.player))];
 
-  generateLine = (player) => <VictoryLine key={player} interpolation={this.props.interpolation} style={{data:{strokeWidth: 0.5}}} data={this.parseData(this.props.chartData,player)} x='date' y='points' />
+  generateLine = (player) => <Victory.VictoryLine key={player} interpolation={this.props.interpolation} style={{data:{strokeWidth: 0.5}}} data={this.parseData(this.props.chartData,player)} x='date' y='points' />
 
   getLines = () => this.getPlayers(this.props.chartData).map(player => this.generateLine(player))
 
   getLegend = () => {
     if (this.getPlayers(this.props.chartData).length)
       return (
-        <VictoryLegend
+        <Victory.VictoryLegend
           colorScale={"qualitative"}
           data={this.getPlayers(this.props.chartData).map(player => ({name: player}))}
           orientation="vertical"
@@ -38,30 +38,37 @@ class StatsgoonMultiLineChart extends React.Component {
 
   getMultiLineChart = () => {
     return (
-      <VictoryChart
+      <Victory.VictoryChart
           padding={{ top: 10, bottom: 20, left: 30, right: 20 }}
-          theme={VictoryTheme.material}
+          theme={Victory.VictoryTheme.material}
           height={200}
           domain={{y: this.props.yDomain}}
+          containerComponent={<Victory.VictoryVoronoiContainer/>}
           >
-        <VictoryAxis
+        <Victory.VictoryAxis
           scale='time'
           style={{
             tickLabels: {fontSize: 3, padding: 5}
           }}
         />
-        <VictoryAxis dependentAxis
+        <Victory.VictoryAxis dependentAxis
           style={{
             tickLabels: {fontSize: 3, padding: 5}
           }}
         />
         {this.getLegend()}
-        <VictoryGroup
+        <Victory.VictoryGroup
+        //labels={(d) => `y: ${d.points}`}
+        labelComponent={
+              <Victory.VictoryTooltip
+                style={{fontSize: 10}}
+              />
+            }
           colorScale={"qualitative"}
         >
         {this.getLines()}
-        </VictoryGroup>
-      </VictoryChart>
+        </Victory.VictoryGroup>
+      </Victory.VictoryChart>
     )
   }
 

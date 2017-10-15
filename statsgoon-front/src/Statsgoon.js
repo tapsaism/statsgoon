@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react'
 import Axios from 'axios'
 
-import Constants from './Constants.js'
+import Actions from './StatsgoonActions'
+import Utils from './utils/StatsgoonUtils'
 import StatsgoonHeader from './components/StatsgoonHeader'
 import StatsgoonParams from './components/StatsgoonParams'
 import StatsgoonResults from './components/StatsgoonResults'
@@ -28,58 +29,45 @@ class Statsgoon extends Component {
 
   optimize = (solverParams) => {
 
-    this.loaderStatusUpdate('active','Running solver')
+    this.loaderStatus('active','Running solver')
 
-    Axios.post(Constants.solverApiUrl,solverParams)
+    Actions.runSolver(solverParams)
     .then(response =>  {
 
-      let players = Object.keys(response.data).map((key, index) => parseInt(response.data[key],10) === 1 ? key : '')
-
-      let params = {
+      this.getCharts({
         filter : [
-            players.filter(player => player !== ''),
-            solverParams.season
-          ]}
-
-      this.drawCharts(params)
+          Utils.parsePlayers(response.data),
+          solverParams.season
+      ]})
 
     })
-    .catch(error => error)
+    .catch(error => {
+      console.log(error)
+      this.loaderStatus('disabled','Error')
+    })
   }
 
-  dailyStats = (params) => Axios.post(Constants.dataApiUrl+'player/daily-stats',params)
-  latestStats = (params) => Axios.post(Constants.dataApiUrl+'player/all-stats',params)
-  gamesLeft = (params) => Axios.post(Constants.dataApiUrl+'player/games-left',params)
+  getCharts = (params) => {
 
-  drawCharts = (params) => {
-    this.loaderStatusUpdate('active','Drawing charts')
+    this.loaderStatus('active','Drawing charts')
 
-    Axios.all([this.dailyStats(params), this.latestStats(params), this.gamesLeft(params)])
+    Actions.getChartData(params)
     .then(Axios.spread((daily,latest,games) => {
       let dataset = {'dailyStats': daily.data, 'latestStats': latest.data, 'gamesLeft': games.data}
-      this.chartDataUpdate(dataset)
-      this.loaderStatusUpdate('disabled')
+      this.setChartData(dataset)
+      this.loaderStatus('disabled')
     }))
-    .catch(error =>{
-      this.loaderStatusUpdate('disabled')
+    .catch(error => {
+      console.log(error)
+      this.loaderStatus('disabled')
     })
   }
 
-  setVisibleContent = (selectedContent) => {
-    this.setState({visibleContent: selectedContent})
-  }
-  chartDataUpdate = (dataset) => {
-                    this.setState(
-                        {dailyStats: dataset.dailyStats,
-                         latestStats: dataset.latestStats,
-                         gamesLeft: dataset.gamesLeft})
-  }
-  loaderStatusUpdate = (value, content) => {
-    this.setState({
-      loaderStatus: value,
-      loaderContent: content
-    })
-  }
+  setVisibleContent = (selectedContent) => this.setState({visibleContent: selectedContent})
+
+  setChartData = (dataset) => this.setState({dailyStats: dataset.dailyStats, latestStats: dataset.latestStats, gamesLeft: dataset.gamesLeft})
+
+  loaderStatus = (value, content) => this.setState({loaderStatus: value, loaderContent: content })
 
   getSchedule = () => <StatsgoonSchedule />
 

@@ -40,7 +40,7 @@ class StatsgoonGamesLeft extends React.Component {
         return (
           <Table.Row key={player}>
           <Table.Cell warning={true}>{player}</Table.Cell>
-          {playerData.map(game => <Table.Cell key={game.date + game.team + game.opponent} negative={game.awaygame === 1 ? true : false} positive={game.homegame === 1 ? true : false}>{game.opponent_acrm}</Table.Cell>)}
+          {playerData.map(game => <Table.Cell key={game.date + player} negative={game.awaygame === 1 ? true : false} positive={game.homegame === 1 ? true : false}>{game.opponent_acrm}</Table.Cell>)}
           </Table.Row>
         )
       })
@@ -50,7 +50,7 @@ class StatsgoonGamesLeft extends React.Component {
   getSchedule = (data) => {
     return (
     <div style={{overflowX: 'auto'}}>
-    <Table size='small' definiton={true} selectable>
+    <Table size='small' definition={true} selectable>
       <Table.Header>
         {this.getTableHeader(data)}
       </Table.Header>

@@ -10,7 +10,7 @@ class StatsgoonTable extends React.Component {
 
     return latestStatsSorted.map(stat => {
       return(
-      <Table.Row key={stat.player_name}>
+      <Table.Row key={stat.playername}>
         <Table.Cell>{stat.team_acronym}</Table.Cell>
         <Table.Cell>{stat.position}</Table.Cell>
         <Table.Cell>{stat.playername}</Table.Cell>
