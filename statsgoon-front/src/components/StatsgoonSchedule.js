@@ -74,7 +74,7 @@ class StatsgoonSchedule extends React.Component {
   getSchedule = () => {
     return (
     <div style={{overflowX: 'auto'}}>
-    <Table size='small' selectable>
+    <Table size='small' stackable selectable>
       <Table.Header>
         {this.getTableHeader(this.state.scheduleData)}
       </Table.Header>

@@ -50,7 +50,7 @@ class StatsgoonGamesLeft extends React.Component {
   getSchedule = (data) => {
     return (
     <div style={{overflowX: 'auto'}}>
-    <Table size='small' definition={true} selectable>
+    <Table size='small' selectable>
       <Table.Header>
         {this.getTableHeader(data)}
       </Table.Header>

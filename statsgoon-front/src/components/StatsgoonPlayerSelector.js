@@ -80,7 +80,7 @@ class StatsgoonPlayerSelector extends React.Component {
         ]
     }
 
-    this.props.drawCharts(params)
+    this.props.getCharts(params)
 
   }
 

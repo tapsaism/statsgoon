@@ -1,6 +1,6 @@
 import React from 'react'
-import Axios from 'axios'
-import Constants from '../../Constants.js'
+import Actions from '../../StatsgoonActions'
+import Utils from '../../utils/StatsgoonUtils'
 import { Dropdown } from 'semantic-ui-react'
 
 class StatsgoonParamsTeamSelector extends React.Component {
@@ -17,21 +17,16 @@ class StatsgoonParamsTeamSelector extends React.Component {
 
   componentDidMount () {
 
-    this.loadTeamSelector()
-
-  }
-
-  loadTeamSelector = () => {
-
-    Axios.get(Constants.dataApiUrl+'team/games-left')
+    Actions.getTeams()
       .then((response) =>  {
-        let teams = response.data.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
         this.setState({
-          teamList: teams,
+          teamList: Utils.parseTeams(response.data),
           loading: false
         })
       })
-      .catch((error) => error);
+      .catch((error) => {
+        console.log(error)
+      });
   }
 
   render() {

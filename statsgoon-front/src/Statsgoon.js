@@ -92,7 +92,7 @@ class Statsgoon extends Component {
     return(
       <Container>
         <StatsgoonPlayerSelector
-          drawCharts={this.drawCharts}
+          getCharts={this.getCharts}
         />
         <StatsgoonResults
           dailyStats={this.state.dailyStats}

@@ -19,13 +19,21 @@ const dynamicSort = (property) => {
   }
 }
 
+const arrayMaxValue = (array,measure) => {
+  return Math.max.apply(Math,array.map(stat => stat[measure]))
+}
+
 const parsePlayers = (solverData) => {
   let players = Object.keys(solverData).map((key, index) => parseInt(solverData[key],10) === 1 ? key : '')
   return players.filter(player => player !== '')
 }
 
-module.exports = {
-  parseDate: parseDate,
-  dynamicSort: dynamicSort,
-  parsePlayers: parsePlayers
+const parseTeams = (teamData) => teamData.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
+
+export default {
+  parseDate,
+  dynamicSort,
+  parsePlayers,
+  parseTeams,
+  arrayMaxValue
 }

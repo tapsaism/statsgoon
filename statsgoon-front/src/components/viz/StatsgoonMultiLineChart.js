@@ -1,6 +1,7 @@
 import React from 'react'
 import * as Victory from 'victory'
 import Utils from '../../utils/StatsgoonUtils.js'
+import { Container } from 'semantic-ui-react'
 
 class StatsgoonMultiLineChart extends React.Component {
 
@@ -16,7 +17,19 @@ class StatsgoonMultiLineChart extends React.Component {
 
   getPlayers = (data) => [...new Set(data.map(stat => stat.player))];
 
-  generateLine = (player) => <Victory.VictoryLine key={player} interpolation={this.props.interpolation} style={{data:{strokeWidth: 0.5}}} data={this.parseData(this.props.chartData,player)} x='date' y='points' />
+  generateLine = (player) => {
+    return(
+      <Victory.VictoryLine
+        key={player}
+        interpolation={this.props.interpolation}
+        style={{
+          data: {strokeWidth: 0.5},
+        }}
+        data={this.parseData(this.props.chartData,player)}
+        x='date'
+        y='points'
+      />
+  )}
 
   getLines = () => this.getPlayers(this.props.chartData).map(player => this.generateLine(player))
 
@@ -38,12 +51,12 @@ class StatsgoonMultiLineChart extends React.Component {
 
   getMultiLineChart = () => {
     return (
+      <Container>
       <Victory.VictoryChart
           padding={{ top: 10, bottom: 20, left: 30, right: 20 }}
           theme={Victory.VictoryTheme.material}
           height={200}
           domain={{y: this.props.yDomain}}
-          containerComponent={<Victory.VictoryVoronoiContainer/>}
           >
         <Victory.VictoryAxis
           scale='time'
@@ -58,17 +71,12 @@ class StatsgoonMultiLineChart extends React.Component {
         />
         {this.getLegend()}
         <Victory.VictoryGroup
-        //labels={(d) => `y: ${d.points}`}
-        labelComponent={
-              <Victory.VictoryTooltip
-                style={{fontSize: 10}}
-              />
-            }
           colorScale={"qualitative"}
         >
         {this.getLines()}
         </Victory.VictoryGroup>
       </Victory.VictoryChart>
+      </Container>
     )
   }
 
