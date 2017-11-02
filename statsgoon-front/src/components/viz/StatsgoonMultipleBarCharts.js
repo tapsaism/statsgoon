@@ -10,6 +10,7 @@ class StatsgoonMultipleLineCharts extends React.Component {
       player: data.player,
       date: Utils.parseDate(data.filedate),
       points: data[this.props.measure],
+      label: data[this.props.measure] > 0 ? data[this.props.measure] : ''
     }
   }
 
@@ -38,7 +39,12 @@ class StatsgoonMultipleLineCharts extends React.Component {
           }}
       />
       <VictoryBar
-        style={{data:{strokeWidth: 0.5}}}
+        style={
+          {
+            data:{strokeWidth: 0.5},
+            labels: {fontSize: 5 }
+        }
+        }
         data={this.parseData(this.props.chartData,player)}
         x='date'
         y='points'
