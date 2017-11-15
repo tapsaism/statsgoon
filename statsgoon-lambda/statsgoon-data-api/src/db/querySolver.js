@@ -51,7 +51,23 @@ let queries = {
                                    opponent_acrm,
                                    SUM(game) OVER (PARTITION BY team) as games_total
                                    FROM v_teams_schedule_with_opponents_current_period
-                                   ORDER BY games_total DESC, team, date`
+                                   ORDER BY games_total DESC, team, date`,
+
+  'team/schedule-with-params': `SELECT
+                                date,
+                                season,
+                                hockeygmperiod,
+                                team,
+                                team_acrm,
+                                awaygame,
+                                homegame,
+                                game,
+                                opponent,
+                                opponent_acrm,
+                                SUM(game) OVER (PARTITION BY team) as games_total
+                                FROM v_teams_schedule_with_opponents
+                                WHERE date between $1 and $2
+                                ORDER BY games_total DESC, team, date`
 }
 
 module.exports.getQueryByRequestType = (requestType) => {

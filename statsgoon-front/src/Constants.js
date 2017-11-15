@@ -19,7 +19,21 @@ const constants = {
       { key: 'last_5_total', text: 'Last 5 games', value: 'last_5_total' },
       { key: 'last_3_total', text: 'Last 3 games', value: 'last_3_total' },
       { key: 'median', text: 'Median', value: 'median' }
-  ]
+  ],
+
+  marks : {
+    0 : '1',
+    25 : '',
+    29 : '2',
+    67 : '',
+    71 : '3',
+    113: '',
+    119: '4',
+    151: '',
+    155: '5',
+    185: ''
+  }
+
 }
 
 export default constants

@@ -30,10 +30,34 @@ const parsePlayers = (solverData) => {
 
 const parseTeams = (teamData) => teamData.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
 
+const addDays = (days) => {
+  let dat = new Date('2017-10-04')
+  dat.setDate(dat.getDate() + days)
+  return dat.getFullYear()+'-'+dat.getMonth()+'-'+dat.getDate()
+}
+
+const dateDiff = (firstDate, secondDate) => {
+  return Math.round((secondDate-firstDate)/(1000*60*60*24));
+}
+
+const periodEnd = () => {
+  let endDays = 0
+  if(new Date() < new Date('2017-10-29')) return 25
+  if(new Date() < new Date('2017-12-10')) return 67
+  if(new Date() < new Date('2018-01-25')) return 119
+  if(new Date() < new Date('2018-12-10')) return 151
+  if(new Date() < new Date('2018-12-10')) return 185
+
+}
+
+
 export default {
   parseDate,
   dynamicSort,
   parsePlayers,
   parseTeams,
-  arrayMaxValue
+  arrayMaxValue,
+  addDays,
+  dateDiff,
+  periodEnd
 }

@@ -1,7 +1,13 @@
 import React from 'react'
-import Axios from 'axios'
+import { Table, Loader, Container, Divider } from 'semantic-ui-react'
+import Slider, { Handle } from 'rc-slider'
+import Tooltip from 'rc-tooltip';
+import 'rc-slider/assets/index.css';
+
 import Constants from '../Constants.js'
-import { Table, Loader, Container } from 'semantic-ui-react'
+import Utils from '../utils/StatsgoonUtils'
+import Actions from '../StatsgoonActions'
+
 
 class StatsgoonSchedule extends React.Component {
 
@@ -24,12 +30,12 @@ class StatsgoonSchedule extends React.Component {
 
   loadSchedule = () => {
 
-    Axios.get(Constants.dataApiUrl+'team/schedule-current-period')
+    Actions.getDefaultSchedule()
       .then((response) =>  {
         this.setState({scheduleData: response.data, loaderStatus: 'disabled'})
         this.getTableData(response.data,this.getTeams(response.data))
       })
-      .catch((error) => error);
+      .catch((error) => error)
   }
 
   getDates = (data) => {
@@ -86,9 +92,78 @@ class StatsgoonSchedule extends React.Component {
     )
   }
 
+  updateSchedule = (value) => {
+
+    this.setState({loaderStatus: 'active'})
+
+    let params = {
+      filter: [
+        Utils.addDays(value[0]),
+        Utils.addDays(value[1])
+      ]
+    }
+
+    Actions.getScheduleWithParams(params)
+    .then(response =>  {
+      this.setState({scheduleData: response.data, loaderStatus: 'disabled'})
+      this.getTableData(response.data,this.getTeams(response.data))
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
+  createSliderWithTooltip = Slider.createSliderWithTooltip
+  Range = this.createSliderWithTooltip(Slider.Range)
+  Handle = Slider.Handle
+
+  handle = (props) => {
+  const { value, dragging, index, ...restProps } = props;
+  return (
+    <Tooltip
+      prefixCls="rc-slider-tooltip"
+      overlay={Utils.addDays(value)}
+      visible={dragging}
+      placement="top"
+      key={index}
+    >
+      <Handle value={value} {...restProps} />
+    </Tooltip>
+  )
+ }
+
+  marks = {
+
+  }
+
+  showParams = () => {
+    return (
+      <div>
+        <this.Range
+          step={1}
+          min={1}
+          max={185}
+          marks={Constants.marks}
+          defaultValue={[Utils.dateDiff(new Date('2017-10-04'), new Date()), Utils.periodEnd()]}
+          onAfterChange = {this.updateSchedule}
+          handle={this.handle}
+          tipFormatter={value => Utils.addDays(value)}
+        />
+      </div>
+    )
+  }
+
   showContent = () => this.state.loaderStatus === 'disabled' ? this.getSchedule() : this.getFidgetSpinner()
 
-  render = () => <Container> {this.showContent()} </Container>
+  render = () => {
+    return (
+      <Container>
+      <Container> {this.showParams()} </Container>
+      <Divider hidden />
+      <Container> {this.showContent()} </Container>
+      </Container>
+    )
+  }
 
 }
 
