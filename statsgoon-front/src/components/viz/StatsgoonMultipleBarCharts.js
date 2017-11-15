@@ -42,7 +42,7 @@ class StatsgoonMultipleLineCharts extends React.Component {
         style={
           {
             data:{strokeWidth: 0.5},
-            labels: {fontSize: 5 }
+            labels: {fontSize: 3.5 }
         }
         }
         data={this.parseData(this.props.chartData,player)}
