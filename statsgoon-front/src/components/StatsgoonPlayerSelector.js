@@ -1,6 +1,7 @@
 import React from 'react'
 import Axios from 'axios'
 import { Button, Grid, Dropdown, Container, Divider } from 'semantic-ui-react'
+import { Analytics } from 'aws-amplify'
 
 import Constants from '../Constants.js'
 import Utils from '../utils/StatsgoonUtils.js'
@@ -85,6 +86,7 @@ class StatsgoonPlayerSelector extends React.Component {
   }
 
   render () {
+    Analytics.record('playerSelect')
     return(
      <Container>
        <Grid columns={4} stackable>

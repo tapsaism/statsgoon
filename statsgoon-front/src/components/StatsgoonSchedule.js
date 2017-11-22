@@ -3,6 +3,8 @@ import { Table, Loader, Container, Divider } from 'semantic-ui-react'
 import Slider, { Handle } from 'rc-slider'
 import Tooltip from 'rc-tooltip';
 import 'rc-slider/assets/index.css';
+import { Analytics } from 'aws-amplify'
+
 
 import Constants from '../Constants.js'
 import Utils from '../utils/StatsgoonUtils'
@@ -156,6 +158,7 @@ class StatsgoonSchedule extends React.Component {
   showContent = () => this.state.loaderStatus === 'disabled' ? this.getSchedule() : this.getFidgetSpinner()
 
   render = () => {
+    Analytics.record('schedule')
     return (
       <Container>
       <Container> {this.showParams()} </Container>

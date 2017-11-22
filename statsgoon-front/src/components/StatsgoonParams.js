@@ -1,5 +1,6 @@
 import React from 'react'
 import { Grid, Button, Container, Divider } from 'semantic-ui-react'
+import { Analytics } from 'aws-amplify'
 
 import TeamSelector from './statsgoonparams/ParamsTeamSelector.js'
 import MeasureSelector from './statsgoonparams/ParamsMeasureSelector.js'
@@ -40,19 +41,24 @@ class StatsgoonParams extends React.Component {
   valueChange = (event) => this.setState({maxValue: event.target.value})
 
   runSolver = () => {
+
     let solverParams = {
           "teams": this.state.selectedTeams,
           "measure":this.state.selectedMeasure,
           "def": this.state.selectedDmen,
           "fwd": this.state.selectedFwd,
           "goalie": this.state.selectedGoalie,
-          "value": this.state.maxValue,
+          "value": this.state.maxValue.replace(/\s/g,''),
           "season": this.state.selectedSeason
     }
     this.props.optimize(solverParams)
+
+    Analytics.record('runSolver')
+
   }
 
   render() {
+    Analytics.record('solver')
     return (
     <Container>
       <Grid columns={6} stackable>

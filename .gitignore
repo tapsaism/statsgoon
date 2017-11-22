@@ -7,3 +7,4 @@ temp/
 build/
 public/
 index-test.js
+aws-exports.js
