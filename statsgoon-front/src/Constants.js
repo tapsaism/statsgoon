@@ -10,6 +10,14 @@ const constants = {
     fwd : 3
   },
 
+  teams: [
+    'Anaheim','Arizona','Boston','Buffalo','Calgary','Carolina','Chicago',
+    'Colorado','Columbus','Dallas','Detroit','Edmonton','Florida','Los Angeles',
+    'Minnesota','Montreal','Nashville','New Jersey','NY Islanders','NY Rangers',
+    'Ottawa','Philadelphia','Pittsburgh','San Jose','St. Louis','Tampa Bay',
+    'Toronto','Vancouver','Vegas','Washington','Winnipeg'
+  ],
+
   measures : [
       { key: 'points_total', text: 'Total Points', value: 'points_total' },
       { key: 'points_avg', text: 'Average Points', value: 'points_avg' },

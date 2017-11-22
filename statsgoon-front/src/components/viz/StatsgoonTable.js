@@ -32,7 +32,7 @@ class StatsgoonTable extends React.Component {
 
   render() {
   return (
-    <Table fixed>
+    <Table fixed unstackable>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Team</Table.HeaderCell>
