@@ -13,12 +13,12 @@ let queries = {
                                     FROM D_PLAYER`,
 
   'player/games-left':             `SELECT
-                                    date,
-                                    opponent_acrm,
-                                    player,
-                                    awaygame,
-                                    homegame,
-                                    game
+                                    DATE,
+                                    OPPONENT_ACRM,
+                                    PLAYER,
+                                    AWAYGAME,
+                                    HOMEGAME,
+                                    GAME
                                     FROM v_teams_schedule_with_opponents_current_period games
                                     INNER JOIN All_Players player
                                     ON games.team = player.team
@@ -32,21 +32,23 @@ let queries = {
                                     ORDER BY filedate`,
 
   'player/top-players':            `SELECT
-                                    season,
-                                    team,
-                                    name,
-                                    position,
-                                    hockeygm_total,
-                                    hockeygm_average,
-                                    hockeygm_value,
-                                    price_per_point
+                                    SEASON,
+                                    TEAM,
+                                    NAME,
+                                    POSITION,
+                                    HOCKEYGM_TOTAL,
+                                    HOCKEYGM_AVERAGE,
+                                    HOCKEYGM_VALUE,
+                                    PRICE_PER_POINT
                                     FROM F_PLAYER_LATEST_GAMES_SEASONAL
 
                                     WHERE SEASON = $1
-                                    AND POSITION = $2
+                                    AND POSITION IN ($2:csv)
                                     AND TEAM IN ($3:csv)
 
-                                    ORDER BY hockeygm_total DESC`,
+                                    ORDER BY hockeygm_total DESC
+
+                                    LIMIT 10`,
 
   'team/games-left':               `SELECT
                                     team,
@@ -56,31 +58,31 @@ let queries = {
                                     ORDER BY games DESC`,
 
   'team/schedule-current-period':  `SELECT
-                                    date,
-                                    season,
-                                    hockeygmperiod,
-                                    team,
-                                    team_acrm,
-                                    awaygame,
-                                    homegame,
-                                    game,
-                                    opponent,
-                                    opponent_acrm,
-                                    SUM(game) OVER (PARTITION BY team) as games_total
+                                    DATE,
+                                    SEASON,
+                                    HOCKEYGMPERIOD,
+                                    TEAM,
+                                    TEAM_ACRM,
+                                    AWAYGAME,
+                                    HOMEGAME,
+                                    GAME,
+                                    OPPONENT,
+                                    OPPONENT_ACRM,
+                                    SUM(GAME) OVER (PARTITION BY TEAM) AS GAMES_TOTAL
                                     FROM v_teams_schedule_with_opponents_current_period
                                     ORDER BY games_total DESC, team, date`,
 
   'team/schedule-with-params':     `SELECT
-                                    date,
-                                    season,
-                                    hockeygmperiod,
-                                    team,
-                                    team_acrm,
-                                    awaygame,
-                                    homegame,
-                                    game,
-                                    opponent,
-                                    opponent_acrm,
+                                    DATE,
+                                    SEASON,
+                                    HOCKEYGMPERIOD,
+                                    TEAM,
+                                    TEAM_ACRM,
+                                    AWAYGAME,
+                                    HOMEGAME,
+                                    GAME,
+                                    OPPONENT,
+                                    OPPONENT_ACRM,
                                     SUM(game) OVER (PARTITION BY team) as games_total
                                     FROM v_teams_schedule_with_opponents
                                     WHERE date between $1 and $2
