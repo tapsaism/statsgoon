@@ -11,7 +11,8 @@ exports.statsgoonRefresher = (event, context, callback) => {
   db.task('update views', t => {
    return t.batch([
            t.any('REFRESH MATERIALIZED VIEW F_SOLVER_DATA'),
-           t.any('REFRESH MATERIALIZED VIEW F_DAILY_STATS')
+           t.any('REFRESH MATERIALIZED VIEW F_DAILY_STATS'),
+           t.any('REFRESH MATERIALIZED VIEW F_TOP_PLAYERS_BY_SEASON')
          ])
    })
    .then(data => {

@@ -40,7 +40,7 @@ let queries = {
                                     HOCKEYGM_AVERAGE,
                                     HOCKEYGM_VALUE,
                                     PRICE_PER_POINT
-                                    FROM F_PLAYER_LATEST_GAMES_SEASONAL
+                                    FROM F_TOP_PLAYERS_BY_SEASON
 
                                     WHERE SEASON = $1
                                     AND POSITION IN ($2:csv)
@@ -86,7 +86,23 @@ let queries = {
                                     SUM(game) OVER (PARTITION BY team) as games_total
                                     FROM v_teams_schedule_with_opponents
                                     WHERE date between $1 and $2
-                                    ORDER BY games_total DESC, team, date`
+                                    ORDER BY games_total DESC, team, date`,
+
+    'team/points':                  `SELECT
+                                     SEASON,
+                                     TEAM,
+                                     SUM(hockeygm_total) HOCKEYGM_TOTAL,
+                                     CAST(AVG(CAST(hockeygm_average AS DECIMAL)) AS INT) HOCKEYGM_AVERAGE,
+                                     CAST(AVG(CAST(hockeygm_value AS INT)) AS INT) HOCKEYGM_VALUE
+
+                                     FROM F_PLAYER_LATEST_GAMES_SEASONAL
+
+                                     WHERE SEASON = $1
+                                     AND POSITION IN ($2:csv)
+
+                                     GROUP BY SEASON,TEAM
+
+                                     ORDER BY HOCKEYGM_TOTAL DESC`
 }
 
 module.exports.getQueryByRequestType = (requestType) => {
