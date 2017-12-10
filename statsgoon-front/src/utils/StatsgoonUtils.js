@@ -7,6 +7,19 @@ const parseDate = (date) => {
   return new Date(y,m,d)
 }
 
+const formatDt = (dt) => {
+
+  let year = dt.getFullYear()
+  let month = '' + (dt.getMonth()+1)
+  let day = '' + dt.getDate()
+
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
+
+  return [year, month, day].join('-')
+
+}
+
 const dynamicSort = (property) => {
   let sortOrder = 1;
   if(property[0] === '-') {
@@ -32,8 +45,10 @@ const parseTeams = (teamData) => teamData.map(data => ({key: data.team, text: da
 
 const addDays = (days) => {
   let dat = new Date('2017-10-04')
+
   dat.setDate(dat.getDate() + days)
-  return dat.getFullYear()+'-'+dat.getMonth()+'-'+dat.getDate()
+
+  return formatDt(dat)
 }
 
 const dateDiff = (firstDate, secondDate) => {
@@ -48,7 +63,6 @@ const periodEnd = () => {
   if(new Date() < new Date('2018-12-10')) return 185
 
 }
-
 
 export default {
   parseDate,
