@@ -91,18 +91,18 @@ let queries = {
     'team/points':                  `SELECT
                                      SEASON,
                                      TEAM,
-                                     SUM(hockeygm_total) HOCKEYGM_TOTAL,
+                                     SUM(hockeygm_total)::integer HOCKEYGM_TOTAL,
                                      CAST(AVG(CAST(hockeygm_average AS DECIMAL)) AS INT) HOCKEYGM_AVERAGE,
                                      CAST(AVG(CAST(hockeygm_value AS INT)) AS INT) HOCKEYGM_VALUE
 
-                                     FROM F_PLAYER_LATEST_GAMES_SEASONAL
+                                     FROM F_TOP_PLAYERS_BY_SEASON
 
                                      WHERE SEASON = $1
                                      AND POSITION IN ($2:csv)
 
                                      GROUP BY SEASON,TEAM
 
-                                     ORDER BY HOCKEYGM_TOTAL DESC`
+                                     ORDER BY 3 DESC`
 }
 
 module.exports.getQueryByRequestType = (requestType) => {

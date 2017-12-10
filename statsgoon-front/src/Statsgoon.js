@@ -11,7 +11,7 @@ import StatsgoonSchedule from './components/StatsgoonSchedule'
 import StatsgoonMenuButtons from './components/StatsgoonMenuButtons'
 import StatsgoonPlayerSelector from './components/StatsgoonPlayerSelector'
 import StatsgoonTopPlayers from './components/StatsgoonTopPlayers'
-
+import StatsgoonTeamsSummary from './components/StatsgoonTeamsSummary'
 
 class Statsgoon extends Component {
 
@@ -109,6 +109,8 @@ class Statsgoon extends Component {
 
   getTopPlayers = () => <StatsgoonTopPlayers />
 
+  getPointsByTeam = () => <StatsgoonTeamsSummary />
+
   getVisibleContent = (selectedContent) => {
 
     switch(selectedContent) {
@@ -120,6 +122,8 @@ class Statsgoon extends Component {
         return this.getPlayerSelector()
       case 'top':
         return this.getTopPlayers()
+      case 'teams':
+        return this.getPointsByTeam()
       default:
         this.getSolver()
     }

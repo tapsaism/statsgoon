@@ -7,6 +7,8 @@ const gamesLeft = (params) => Axios.post(Constants.dataApiUrl+'player/games-left
 
 const getTopPlayers = (params) => Axios.post(Constants.dataApiUrl+'player/top-players',params)
 
+const getPointsByTeam = (params) => Axios.post(Constants.dataApiUrl+'team/points',params)
+
 const getTeams = () => Axios.get(Constants.dataApiUrl+'team/games-left')
 const getDefaultSchedule = () => Axios.get(Constants.dataApiUrl+'team/schedule-current-period')
 
@@ -22,6 +24,15 @@ const getTopPlayersAll = (paramsArray) => Axios.all(
     ]
     )
 
+const getPointsByTeamAll = (paramsArray) => Axios.all(
+    [
+      getPointsByTeam(paramsArray[0]),
+      getPointsByTeam(paramsArray[1]),
+      getPointsByTeam(paramsArray[2]),
+      getPointsByTeam(paramsArray[3])
+    ]
+    )
+
 export default {
   dailyStats,
   runSolver,
@@ -29,5 +40,6 @@ export default {
   getTeams,
   getDefaultSchedule,
   getScheduleWithParams,
-  getTopPlayersAll
+  getTopPlayersAll,
+  getPointsByTeamAll
 }

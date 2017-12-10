@@ -7,9 +7,8 @@ class StatsgoonHeader extends React.Component {
   return (
     <div>
     <Divider hidden />
-    <Container textAlign='center'>
+    <Container textAlign='left'>
     <Header as='h2'>Statsgoon</Header>
-    <Container text>- Optimize your team -</Container>
     </Container>
     <Divider hidden />
     </div>
