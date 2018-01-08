@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Container } from 'semantic-ui-react'
 
-class StatsgoonGamesLeft extends React.Component {
+export default class StatsgoonGamesLeft extends React.Component {
 
   constructor(props) {
 
@@ -65,6 +65,3 @@ class StatsgoonGamesLeft extends React.Component {
   render = () => <Container> {this.getSchedule(this.props.chartData)} </Container>
 
 }
-
-
-export default StatsgoonGamesLeft

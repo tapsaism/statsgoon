@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Button, Divider} from 'semantic-ui-react'
 
-class StatsgoonMenuButtons extends React.Component {
+export default class StatsgoonMenuButtons extends React.Component {
 
   handleClick = (value) => {
     this.props.setVisibleContent(value)
@@ -21,5 +21,3 @@ class StatsgoonMenuButtons extends React.Component {
     </Container>
   )}
 }
-
-export default StatsgoonMenuButtons

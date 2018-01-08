@@ -9,7 +9,7 @@ import ValueField from './statsgoonparams/ParamsValueField.js'
 import PeriodSelector from './statsgoonparams/ParamsPeriodSelector.js'
 import Constants from '../Constants.js'
 
-class StatsgoonParams extends React.Component {
+export default class StatsgoonParams extends React.Component {
 
   constructor (props) {
 
@@ -103,5 +103,3 @@ class StatsgoonParams extends React.Component {
     </Container>
   )}
 }
-
-export default StatsgoonParams

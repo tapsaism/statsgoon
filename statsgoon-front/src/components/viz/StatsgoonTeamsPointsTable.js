@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from 'semantic-ui-react'
 import Utils from '../../utils/StatsgoonUtils.js'
 
-class StatsgoonTable extends React.Component {
+export default class StatsgoonTable extends React.Component {
 
   createRows = (stats) => {
 
@@ -40,5 +40,3 @@ class StatsgoonTable extends React.Component {
   )
   }
 }
-
-export default StatsgoonTable

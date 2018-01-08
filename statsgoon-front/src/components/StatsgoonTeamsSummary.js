@@ -7,7 +7,7 @@ import Constants from '../Constants.js'
 import Actions from '../StatsgoonActions'
 import Table from './viz/StatsgoonTeamsPointsTable'
 
-class StatsgoonTeamsSummary extends React.Component {
+export default class StatsgoonTeamsSummary extends React.Component {
 
   constructor(props) {
 
@@ -77,5 +77,3 @@ class StatsgoonTeamsSummary extends React.Component {
   }
 
 }
-
-export default StatsgoonTeamsSummary

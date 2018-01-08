@@ -3,7 +3,7 @@ import Actions from '../../StatsgoonActions'
 import Utils from '../../utils/StatsgoonUtils'
 import { Dropdown } from 'semantic-ui-react'
 
-class StatsgoonParamsTeamSelector extends React.Component {
+export default class StatsgoonParamsTeamSelector extends React.Component {
 
   constructor(props) {
 
@@ -39,5 +39,3 @@ class StatsgoonParamsTeamSelector extends React.Component {
     )
   }
 }
-
-export default StatsgoonParamsTeamSelector

@@ -11,7 +11,7 @@ import Utils from '../utils/StatsgoonUtils'
 import Actions from '../StatsgoonActions'
 
 
-class StatsgoonSchedule extends React.Component {
+export default class StatsgoonSchedule extends React.Component {
 
   constructor(props) {
 
@@ -169,6 +169,3 @@ class StatsgoonSchedule extends React.Component {
   }
 
 }
-
-
-export default StatsgoonSchedule

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
-class StatsgoonParamsValueField extends React.Component {
+export default class StatsgoonParamsValueField extends React.Component {
   render() {
     return (
     <Form>
@@ -12,5 +12,3 @@ class StatsgoonParamsValueField extends React.Component {
     )
   }
 }
-
-export default StatsgoonParamsValueField

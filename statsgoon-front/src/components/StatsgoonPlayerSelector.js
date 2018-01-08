@@ -6,7 +6,7 @@ import { Analytics } from 'aws-amplify'
 import Constants from '../Constants.js'
 import Utils from '../utils/StatsgoonUtils.js'
 
-class StatsgoonPlayerSelector extends React.Component {
+export default class StatsgoonPlayerSelector extends React.Component {
 
   constructor (props) {
 
@@ -131,5 +131,3 @@ class StatsgoonPlayerSelector extends React.Component {
   )
   }
 }
-
-export default StatsgoonPlayerSelector

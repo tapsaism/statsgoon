@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Header, Divider} from 'semantic-ui-react'
 
-class StatsgoonHeader extends React.Component {
+ export default class StatsgoonHeader extends React.Component {
 
   render() {
   return (
@@ -14,5 +14,3 @@ class StatsgoonHeader extends React.Component {
     </div>
   )}
 }
-
-export default StatsgoonHeader

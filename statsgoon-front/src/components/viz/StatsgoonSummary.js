@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Statistic, Table, Divider } from 'semantic-ui-react'
 
-class StatsgoonSummary extends React.Component {
+export default class StatsgoonSummary extends React.Component {
 
   getPlayerDetails = (stats,index,position) => {
     let players = stats.filter(stat => stat.position === position)
@@ -91,5 +91,3 @@ class StatsgoonSummary extends React.Component {
   render = () => this.getStatistics(this.props.chartDataStats, this.props.chartDataSchedule)
 
 }
-
-export default StatsgoonSummary

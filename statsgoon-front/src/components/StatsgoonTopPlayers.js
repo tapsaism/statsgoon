@@ -7,7 +7,7 @@ import Constants from '../Constants.js'
 import Actions from '../StatsgoonActions'
 import Table from './viz/StatsgoonTopPlayersTable'
 
-class StatsgoonTopPlayers extends React.Component {
+export default class StatsgoonTopPlayers extends React.Component {
 
   constructor(props) {
 
@@ -77,6 +77,3 @@ class StatsgoonTopPlayers extends React.Component {
   }
 
 }
-
-
-export default StatsgoonTopPlayers

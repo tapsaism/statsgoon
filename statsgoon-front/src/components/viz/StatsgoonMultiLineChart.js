@@ -3,7 +3,7 @@ import * as Victory from 'victory'
 import Utils from '../../utils/StatsgoonUtils.js'
 import { Container } from 'semantic-ui-react'
 
-class StatsgoonMultiLineChart extends React.Component {
+export default class StatsgoonMultiLineChart extends React.Component {
 
   createStat = (data) => {
     return {
@@ -85,5 +85,3 @@ class StatsgoonMultiLineChart extends React.Component {
       this.getMultiLineChart()
     )}
 }
-
-export default StatsgoonMultiLineChart
