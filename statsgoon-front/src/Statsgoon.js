@@ -5,7 +5,7 @@ import Axios from 'axios'
 import Actions from './StatsgoonActions'
 import Utils from './utils/StatsgoonUtils'
 import StatsgoonHeader from './components/StatsgoonHeader'
-import StatsgoonParams from './components/StatsgoonParams'
+import StatsgoonSolverParams from './components/StatsgoonSolverParams'
 import StatsgoonResults from './components/StatsgoonResults'
 import StatsgoonSchedule from './components/StatsgoonSchedule'
 import StatsgoonMenuButtons from './components/StatsgoonMenuButtons'
@@ -69,23 +69,21 @@ class Statsgoon extends Component {
 
   setChartData = (dataset) => this.setState({dailyStats: dataset.dailyStats, latestStats: dataset.latestStats, gamesLeft: dataset.gamesLeft})
 
+  emptyChartData = () => this.setState({dailyStats: [], latestStats: [], gamesLeft: []})
+
   loaderStatus = (value, content) => this.setState({loaderStatus: value, loaderContent: content })
 
   getSchedule = () => <StatsgoonSchedule />
 
+  getResults = () => <StatsgoonResults dailyStats={this.state.dailyStats} latestStats={this.state.latestStats} gamesLeft={this.state.gamesLeft} loaderStatus={this.state.loaderStatus} loaderContent={this.state.loaderContent} />
+
   getSolver = () => {
     return (
       <Container>
-      <StatsgoonParams
+      <StatsgoonSolverParams
         optimize={this.optimize}
       />
-      <StatsgoonResults
-        dailyStats={this.state.dailyStats}
-        latestStats={this.state.latestStats}
-        gamesLeft={this.state.gamesLeft}
-        loaderStatus={this.state.loaderStatus}
-        loaderContent={this.state.loaderContent}
-      />
+      {this.getResults()}
       </Container>
     )
   }
@@ -96,13 +94,7 @@ class Statsgoon extends Component {
         <StatsgoonPlayerSelector
           getCharts={this.getCharts}
         />
-        <StatsgoonResults
-          dailyStats={this.state.dailyStats}
-          latestStats={this.state.latestStats}
-          gamesLeft={this.state.gamesLeft}
-          loaderStatus={this.state.loaderStatus}
-          loaderContent={this.state.loaderContent}
-        />
+        {this.getResults()}
       </Container>
     )
   }

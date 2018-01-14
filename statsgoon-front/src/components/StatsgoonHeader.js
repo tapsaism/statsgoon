@@ -10,7 +10,7 @@ import { Container, Header, Divider} from 'semantic-ui-react'
     <Container textAlign='left'>
     <Header as='h2'>Statsgoon</Header>
     </Container>
-    <Divider hidden />
+    <Divider />
     </div>
   )}
 }

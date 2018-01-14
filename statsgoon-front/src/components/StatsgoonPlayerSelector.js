@@ -53,7 +53,7 @@ export default class StatsgoonPlayerSelector extends React.Component {
 
   }
 
-  getDropdownElement = (player) => ({key: player.name, text: player.team +'-'+ player.name, value: player.name})
+  getDropdownElement = (player) => ({key: player.team +'-'+ player.name, text: player.team +'-'+ player.name, value: player.name})
 
   getPlayersByPosition = (data, position) => data.filter(player => player.position === position).map(player => this.getDropdownElement(player))
 

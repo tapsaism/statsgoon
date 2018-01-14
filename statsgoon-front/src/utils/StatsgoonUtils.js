@@ -41,7 +41,11 @@ const parsePlayers = (solverData) => {
   return players.filter(player => player !== '')
 }
 
-const parseTeams = (teamData) => teamData.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
+const parseTeams = (teamData) => {
+  let teams = teamData.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
+  teams.unshift({key: 'all', text: 'All teams', value: 'all'})
+  return teams
+}
 
 const addDays = (days) => {
   let dat = new Date('2017-10-04')

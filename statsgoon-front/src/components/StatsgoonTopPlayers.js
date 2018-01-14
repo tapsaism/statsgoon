@@ -1,11 +1,12 @@
 import React from 'react'
-import { Loader, Container, Header } from 'semantic-ui-react'
+import { Loader, Container, Header, Divider, Grid, Button } from 'semantic-ui-react'
 import Axios from 'axios'
 import { Analytics } from 'aws-amplify'
 
 import Constants from '../Constants.js'
 import Actions from '../StatsgoonActions'
 import Table from './viz/StatsgoonTopPlayersTable'
+import TeamSelector from './statsgoonparams/ParamsTeamSelector.js'
 
 export default class StatsgoonTopPlayers extends React.Component {
 
@@ -17,7 +18,8 @@ export default class StatsgoonTopPlayers extends React.Component {
       topAllPos: [],
       topGoalies: [],
       topDmen: [],
-      topFwd:[],
+      topFwd: [],
+      selectedTeams: ['all'],
       loaderStatus: 'disabled',
       loaderContent: 'Loading top players'
     }
@@ -33,11 +35,13 @@ export default class StatsgoonTopPlayers extends React.Component {
 
     this.setState({loaderStatus: 'active'})
 
+    let teams = this.state.selectedTeams[0] === 'all' ? Constants.teams : this.state.selectedTeams
+
     let paramsArray = [
-      this.getFilter("2017-2018",["GOA","DEF","FWD"],Constants.teams),
-      this.getFilter("2017-2018",["GOA"],Constants.teams),
-      this.getFilter("2017-2018",["DEF"],Constants.teams),
-      this.getFilter("2017-2018",["FWD"],Constants.teams)
+      this.getFilter("2017-2018",["GOA","DEF","FWD"],teams),
+      this.getFilter("2017-2018",["GOA"],teams),
+      this.getFilter("2017-2018",["DEF"],teams),
+      this.getFilter("2017-2018",["FWD"],teams)
     ]
 
     Actions.getTopPlayersAll(paramsArray)
@@ -47,6 +51,8 @@ export default class StatsgoonTopPlayers extends React.Component {
       }))
       .catch((error) => error)
   }
+
+  teamChange = (e, { value }) => this.setState({selectedTeams: value})
 
   createTables = () => {
     return (
@@ -63,6 +69,10 @@ export default class StatsgoonTopPlayers extends React.Component {
     )
   }
 
+  refreshList = () => {
+    this.loadTopLists()
+  }
+
   getFidgetSpinner = () => <Container><Loader className={this.state.loaderStatus} content={this.state.loaderContent}/></Container>
 
   showContent = () => this.state.loaderStatus === 'disabled' ? this.createTables() : this.getFidgetSpinner()
@@ -71,7 +81,20 @@ export default class StatsgoonTopPlayers extends React.Component {
     Analytics.record('topPlayers')
     return (
       <Container>
-      {this.showContent()}
+        <Container>
+        <Grid columns={10}>
+          <Grid.Row>
+            <Grid.Column width={14}>
+              <TeamSelector teamChange={this.teamChange} />
+            </Grid.Column>
+            <Grid.Column width={2}>
+              <Button fluid basic color='blue' type='submit' onClick={this.loadTopLists}>Toppen!</Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        </Container>
+          <Divider />
+        <Container> {this.showContent()} </Container>
       </Container>
     )
   }

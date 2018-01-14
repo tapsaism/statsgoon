@@ -1,6 +1,5 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react'
-import Utils from '../../utils/StatsgoonUtils.js'
 
 export default class StatsgoonTable extends React.Component {
 

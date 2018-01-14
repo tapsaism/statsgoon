@@ -162,7 +162,8 @@ export default class StatsgoonSchedule extends React.Component {
     return (
       <Container>
       <Container> {this.showParams()} </Container>
-      <Divider hidden />
+      <Divider hidden/>
+      <Divider />
       <Container> {this.showContent()} </Container>
       </Container>
     )

@@ -3,7 +3,6 @@ import { Loader, Container, Header } from 'semantic-ui-react'
 import Axios from 'axios'
 import { Analytics } from 'aws-amplify'
 
-import Constants from '../Constants.js'
 import Actions from '../StatsgoonActions'
 import Table from './viz/StatsgoonTeamsPointsTable'
 
