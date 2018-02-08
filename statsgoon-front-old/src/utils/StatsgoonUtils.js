@@ -1,8 +1,10 @@
 
 const parseDate = (date) => {
   let str = String(date)
-  let strArr = [str.substr(0,4), str.substr(4,2),str.substr(6,2)]
-  return new Date(strArr.join('-'))
+  let y = str.substr(0,4),
+      m = str.substr(4,2),
+      d = str.substr(6,2)
+  return new Date(y,m,d)
 }
 
 const formatDt = (dt) => {
@@ -66,15 +68,6 @@ const periodEnd = () => {
 
 }
 
-const getPlayerDropdownElement = (player) => ({key: player.team +'-'+ player.name, text: player.team +'-'+ player.name, value: player.name})
-
-const parsePlayerData = (playerData, position) => {
-  return playerData
-          .filter(player => player.position === position)
-          .map(player => getPlayerDropdownElement(player))
-          .sort(dynamicSort('text'))
-}
-
 export default {
   parseDate,
   dynamicSort,
@@ -83,6 +76,5 @@ export default {
   arrayMaxValue,
   addDays,
   dateDiff,
-  periodEnd,
-  parsePlayerData
+  periodEnd
 }

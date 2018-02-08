@@ -44,7 +44,6 @@ class Statsgoon extends Component {
 
     })
     .catch(error => {
-      console.log(error)
       this.loaderStatus('disabled','Error')
     })
   }
@@ -60,7 +59,6 @@ class Statsgoon extends Component {
       this.loaderStatus('disabled')
     }))
     .catch(error => {
-      console.log(error)
       this.loaderStatus('disabled')
     })
   }
