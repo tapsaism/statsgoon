@@ -22,7 +22,8 @@ let queries = {
                                     FROM v_teams_schedule_with_opponents_current_period games
                                     INNER JOIN All_Players player
                                     ON games.team = player.team
-                                    WHERE player IN ($1:csv)`,
+                                    WHERE player IN ($1:csv)
+                                    ORDER BY DATE`,
 
   'player/daily-stats':            `SELECT
                                   	*
