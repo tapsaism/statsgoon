@@ -28,11 +28,15 @@ class StatsgoonTopPlayersContainer extends React.Component {
 
   refreshList = () => {
 
+    let teams = this.props.teams.selectedTeams[0] === 'all'
+                  ? Constants.teams
+                  : this.props.teams.selectedTeams
+
     let paramsArray = [
-      this.getFilter("2017-2018",["GOA","DEF","FWD"],this.props.teams.selectedTeams),
-      this.getFilter("2017-2018",["GOA"],this.props.teams.selectedTeams),
-      this.getFilter("2017-2018",["DEF"],this.props.teams.selectedTeams),
-      this.getFilter("2017-2018",["FWD"],this.props.teams.selectedTeams)
+      this.getFilter("2017-2018",["GOA","DEF","FWD"],teams),
+      this.getFilter("2017-2018",["GOA"],teams),
+      this.getFilter("2017-2018",["DEF"],teams),
+      this.getFilter("2017-2018",["FWD"],teams)
     ]
 
     this.props.actions.loadTopPlayersByTeam(paramsArray)
