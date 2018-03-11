@@ -61,8 +61,8 @@ const periodEnd = () => {
   if(new Date() <= new Date('2017-10-29')) return 25
   if(new Date() <= new Date('2017-12-10')) return 67
   if(new Date() <= new Date('2018-01-25')) return 113
-  if(new Date() <= new Date('2018-12-10')) return 151
-  if(new Date() <= new Date('2018-12-10')) return 185
+  if(new Date() <= new Date('2018-03-04')) return 151
+  if(new Date() <= new Date('2018-04-08')) return 185
 
 }
 
