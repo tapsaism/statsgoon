@@ -40,7 +40,10 @@ const parsePlayers = (solverData) => {
 }
 
 const parseTeams = (teamData) => {
-  let teams = teamData.map(data => ({key: data.team, text: data.team + ' - ' + data.games, value: data.team}))
+  let teams = teamData.map(data => {
+    let desc = data.team + ' h:' + data.home_games+ ' a:' + data.away_games + ' t:' + data.games
+    return {key: data.team, text: desc, value: data.team}
+  })
   teams.unshift({key: 'all', text: 'All teams', value: 'all'})
   return teams
 }

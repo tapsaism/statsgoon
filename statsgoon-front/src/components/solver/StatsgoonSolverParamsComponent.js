@@ -12,22 +12,22 @@ const StatsgoonSolverParamsComponent = (props) => {
     <Container>
       <Grid columns={6} stackable>
         <Grid.Row>
-          <Grid.Column>
+          <Grid.Column width={2}>
             <SeasonSelector/>
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={4}>
             <TeamSelector />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={3}>
             <MeasureSelector />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={3}>
             <PosSelector />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={2}>
             <ValueField />
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={2}>
             <Button fluid basic color='blue' type='submit' onClick={props.runSolver}>Optimize!</Button>
           </Grid.Column>
         </Grid.Row>
