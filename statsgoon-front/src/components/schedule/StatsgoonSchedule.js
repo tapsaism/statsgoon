@@ -11,8 +11,10 @@ const getTableHeaderDates = (data) => {
 const getTableHeader = (data) => {
     return (
       <Table.Row>
-        <Table.HeaderCell key='team_header'>Team</Table.HeaderCell>
-        <Table.HeaderCell key='game_header'>Games</Table.HeaderCell>
+        <Table.HeaderCell width={1} key='team_header'>Team</Table.HeaderCell>
+        <Table.HeaderCell width={1} key='home_game_header'>Home</Table.HeaderCell>
+        <Table.HeaderCell width={1} key='away_game_header'>Away</Table.HeaderCell>
+        <Table.HeaderCell width={1} key='game_header'>Total</Table.HeaderCell>
         {getTableHeaderDates(data)}
       </Table.Row>
     )
@@ -30,6 +32,8 @@ const getTableRows = (scheduleData) => {
       return (
         <Table.Row key={team}>
         <Table.Cell warning={true}>{team}</Table.Cell>
+        <Table.Cell positive={true}>{teamData[0].home_games_total}</Table.Cell>
+        <Table.Cell negative={true}>{teamData[0].away_games_total}</Table.Cell>
         <Table.Cell warning={true}>{teamData[0].games_total}</Table.Cell>
         {teamData.map(game => <Table.Cell key={game.date + game.team + game.opponent} negative={game.awaygame === 1 ? true : false} positive={game.homegame === 1 ? true : false}>{game.opponent_acrm}</Table.Cell>)}
         </Table.Row>

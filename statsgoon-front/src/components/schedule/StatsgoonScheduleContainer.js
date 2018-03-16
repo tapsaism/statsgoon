@@ -25,6 +25,7 @@ class StatsgoonScheduleContainer extends React.Component {
           updateSchedule={this.props.actions.loadScheduleWithParams}
           rangeDefaultValue={this.props.schedule.rangeDefaultValue}
         />
+      <Divider hidden/>
       <Divider />
       <Container>
         <StatsgoonScheduleComponent
