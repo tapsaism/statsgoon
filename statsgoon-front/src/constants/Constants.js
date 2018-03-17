@@ -1,8 +1,8 @@
 const constants = {
 
-  dataApiUrl : 'https://qgb6qyqmxb.execute-api.us-east-1.amazonaws.com/beta/statsgoon-data-api/v1/',
+  dataApiUrl : process.env.REACT_APP_DATA_API_URL,
 
-  solverApiUrl : 'https://zegyactk64.execute-api.us-east-1.amazonaws.com/statsgoon/solver/solve',
+  solverApiUrl : process.env.REACT_APP_SOLVER_API_URL,
 
   positions : {
     goalie : 1,
