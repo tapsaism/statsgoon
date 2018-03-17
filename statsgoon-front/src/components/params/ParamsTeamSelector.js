@@ -19,6 +19,7 @@ class StatsgoonParamsTeamSelector extends React.Component {
   render() {
       return (
       <Dropdown
+        search={true}
         loading = {this.props.teams.teamsLoading}
         placeholder='Teams'
         onChange={this.teamChange}
