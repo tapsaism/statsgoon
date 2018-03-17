@@ -11,3 +11,4 @@ aws-exports.js
 *.htm
 osmosis.js
 .env
+refresh_data.sql
