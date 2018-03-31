@@ -37,31 +37,65 @@ SELECT DISTINCT staging.hockeygm_stats_all.team,
             WHEN team::text = 'Winnipeg'::text THEN 'WPG'::text
             ELSE NULL::text
         END AS team_acronym,
-        case
-        		when team::text in ('Washington','Pittsburgh','Philadelphia',
+        CASE
+        		WHEN team::text in ('Washington','Pittsburgh','Philadelphia',
         											'New Jersey','NY Islanders','Columbus','Carolina','NY Rangers')
-        											then 'Metropolitan'
-        		when team::text in ('Tampa Bay','Boston','Toronto',
+        											THEN 'Metropolitan'
+        		WHEN team::text in ('Tampa Bay','Boston','Toronto',
         											'Florida','Detroit','Ottawa','Montreal','Buffalo')
-        											then 'Atlantic'
-        		when team::text in ('Nashville','Winnipeg','Dallas',
+        											THEN 'Atlantic'
+        		WHEN team::text in ('Nashville','Winnipeg','Dallas',
         											'St. Louis','Minnesota','Colorado','Chicago')
-        											then 'Central'
-        		when team::text in ('Vegas','San Jose','Anaheim',
+        											THEN 'Central'
+        		WHEN team::text in ('Vegas','San Jose','Anaheim',
         											'Calgary','Los Angeles','Vancouver','Edmonton','Arizona')
-        											then 'Pacific'
+        											THEN 'Pacific'
         END AS team_division,
-        case
-        		when team::text in ('Washington','Pittsburgh','Philadelphia',
+        CASE
+        		WHEN team::text in ('Washington','Pittsburgh','Philadelphia',
         							'New Jersey','NY Islanders','Columbus','Carolina','NY Rangers',
 								'Tampa Bay','Boston','Toronto',
         							'Florida','Detroit','Ottawa','Montreal','Buffalo')
-        											then 'Eastern'
-        		when team::text in ('Nashville','Winnipeg','Dallas',
+        											THEN 'Eastern'
+        		WHEN team::text in ('Nashville','Winnipeg','Dallas',
         							'St. Louis','Minnesota','Colorado','Chicago',
         							'Vegas','San Jose','Anaheim',
         							'Calgary','Los Angeles','Vancouver','Edmonton','Arizona')
-        											then 'Western'
-        END AS team_conference
+        											THEN 'Western'
+        END AS team_conference,
+         CASE
+            WHEN team::text = 'Anaheim'::text THEN 'Anaheim Ducks'::text
+            WHEN team::text = 'Arizona'::text THEN 'Arizona Coyotes'::text
+            WHEN team::text = 'Boston'::text THEN 'Boston Bruins'::text
+            WHEN team::text = 'Buffalo'::text THEN 'Buffalo Sabres'::text
+            WHEN team::text = 'Carolina'::text THEN 'Carolina Hurricanes'::text
+            WHEN team::text = 'Calgary'::text THEN 'Calgary Flames'::text
+            WHEN team::text = 'Chicago'::text THEN 'Chicago Blackhawks'::text
+            WHEN team::text = 'Columbus'::text THEN 'Columbus Blue Jackets'::text
+            WHEN team::text = 'Colorado'::text THEN 'Colorado Avalanche'::text
+            WHEN team::text = 'Dallas'::text THEN 'Dallas Stars'::text
+            WHEN team::text = 'Detroit'::text THEN 'Detroit Red Wings'::text
+            WHEN team::text = 'Edmonton'::text THEN 'Edmonton Oilers'::text
+            WHEN team::text = 'Florida'::text THEN 'Florida Panthers'::text
+            WHEN team::text = 'Los Angeles'::text THEN 'Los Angeles Kings'::text
+            WHEN team::text = 'Minnesota'::text THEN 'Minnesota Wild'::text
+            WHEN team::text = 'Montreal'::text THEN 'Montreal Canadiens'::text
+            WHEN team::text = 'Nashville'::text THEN 'Nashville Predators'::text
+            WHEN team::text = 'New Jersey'::text THEN 'New Jersey Devils'::text
+            WHEN team::text = 'NY Islanders'::text THEN 'New York Islanders'::text
+            WHEN team::text = 'NY Rangers'::text THEN 'New York Rangers'::text
+            WHEN team::text = 'Ottawa'::text THEN 'Ottawa Senators'::text
+            WHEN team::text = 'Philadelphia'::text THEN 'Philadelphia Flyers'::text
+            WHEN team::text = 'Pittsburgh'::text THEN 'Pittsburgh Penguins'::text
+            WHEN team::text = 'San Jose'::text THEN 'San Jose Sharks'::text
+            WHEN team::text = 'St. Louis'::text THEN 'St Louis Blues'::text
+            WHEN team::text = 'Tampa Bay'::text THEN 'Tampa Bay Lightning'::text
+            WHEN team::text = 'Toronto'::text THEN 'Toronto Maple Leafs'::text
+            WHEN team::text = 'Vancouver'::text THEN 'Vancouver Canucks'::text
+            WHEN team::text = 'Vegas'::text THEN 'Las Vegas Knights'::text
+            WHEN team::text = 'Washington'::text THEN 'Washington Capitals'::text
+            WHEN team::text = 'Winnipeg'::text THEN 'Winnipeg Jets'::text
+            ELSE NULL::text
+        END AS team_long_name
    FROM staging.hockeygm_stats_all
   WHERE staging.hockeygm_stats_all.team IS NOT NULL;
