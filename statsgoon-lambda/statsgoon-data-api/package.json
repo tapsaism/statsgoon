@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.0",
-    "pg-promise": "^6.3.5"
+    "pg-promise": "^6.3.5",
+    "squel": "^5.12.0"
   }
 }
