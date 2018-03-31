@@ -20,7 +20,11 @@ exports.s3handler = (event, context, callback) => {
     const gamestats = scraper.scrapeGameStats(data.Body)
 
     s3.putObject({ Bucket: 'hockey-reference-txt', Key: key+'.txt', Body: gamestats }, function(err, data) {
-      callback(null, key+'.txt file created')
+      console.log('File saved to hockey-reference-txt')
     });
+    s3.putObject({ Bucket: 'stg-hrf-stats', Key: key+'.txt', Body: gamestats }, function(err, data) {
+      console.log('File saved to stg-hrf-stats')
+    });
+    callback(null, key+'.txt file created')
   })
 }

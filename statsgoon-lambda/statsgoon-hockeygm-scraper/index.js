@@ -146,6 +146,21 @@ exports.s3handler = (event, context, callback) => {
               console.log(goaliesFile, 'uploaded'); // File uploads correctly.
             });
 
+            s3.putObject({ Bucket: 'stg-hgm-forwards', Key: forwardsFile, Body: forwards }, function(err, data) {
+              console.log('Error: ', err);
+              console.log(forwardsFile, 'uploaded'); // File uploads correctly.
+            });
+
+            s3.putObject({ Bucket: 'stg-hgm-dmen', Key: defensemenFile, Body: defensemen }, function(err, data) {
+              console.log('Error: ', err);
+              console.log(defensemenFile, 'uploaded'); // File uploads correctly.
+            });
+
+            s3.putObject({ Bucket: 'stg-hgm-goalies', Key: goaliesFile, Body: goalies }, function(err, data) {
+              console.log('Error: ', err);
+              console.log(goaliesFile, 'uploaded'); // File uploads correctly.
+            });
+
             callback(null, 'All Done!');
         }
     });
