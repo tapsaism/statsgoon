@@ -1,3 +1,3 @@
 # Statsgoon
 
-## Repo for [statsgoon](http://www.statsgoon.net) website
+## Repo for [statsgoon](http://statsgoon.net) website
