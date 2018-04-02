@@ -1,2 +1,3 @@
 # Statsgoon
-### Lean Agile Hockey Analytics Platform Solution Suite
+
+## Repo for [statsgoon](http://www.statsgoon.net) website
