@@ -12,3 +12,7 @@ aws-exports.js
 osmosis.js
 .env
 refresh_data.sql
+*.pyc
+bs4
+psycopg2
+*.dist-info
