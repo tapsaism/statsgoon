@@ -14,7 +14,7 @@ const Range = Slider.createSliderWithTooltip(Slider.Range)
         <Range
           step={1}
           min={1}
-          max={185}
+          max={240}
           marks={Constants.marks}
           defaultValue={props.rangeDefaultValue}
           onAfterChange = {props.updateSchedule}

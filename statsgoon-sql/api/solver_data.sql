@@ -68,6 +68,7 @@ SELECT
     ,hgm_total_last_3_games AS last_3_total
     ,hgm_avg_last_3_games AS last_3_avg
     ,median
+    ,DENSE_RANK() OVER (PARTITION BY season, POSITION ORDER BY hgm_total DESC) rank_by_position
     ,now() AS refresh_date
     
 FROM publish.f_daily_stats stats

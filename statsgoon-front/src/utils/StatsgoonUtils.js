@@ -67,7 +67,7 @@ const periodEnd = () => {
   if(new Date() <= new Date('2018-01-25')) return 113
   if(new Date() <= new Date('2018-03-04')) return 151
   if(new Date() <= new Date('2018-04-08')) return 185
-
+  if(new Date() <= new Date('2018-06-30')) return 240
 }
 
 const getPlayerDropdownElement = (player) => ({key: player.team +'-'+ player.name, text: player.team +'-'+ player.name, value: player.name})

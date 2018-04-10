@@ -33,6 +33,7 @@ export default class StatsgoonSummary extends React.Component {
         <Table.Cell><Statistic size='mini' value={data.value} /></Table.Cell>
         <Table.Cell><Statistic size='mini' value={data.points_avg} /></Table.Cell>
         <Table.Cell><Statistic size='mini' value={data.points_total} /></Table.Cell>
+        <Table.Cell><Statistic size='mini' value={data.rank_by_position} /></Table.Cell>
       </Table.Row>
     )
   }
@@ -48,6 +49,7 @@ export default class StatsgoonSummary extends React.Component {
         <Table.Cell><Statistic size='mini' label='value'/></Table.Cell>
         <Table.Cell><Statistic size='mini' label='avg'/></Table.Cell>
         <Table.Cell><Statistic size='mini' label='total'/></Table.Cell>
+        <Table.Cell><Statistic size='mini' label='rank'/></Table.Cell>
       </Table.Row>
     )
   }
