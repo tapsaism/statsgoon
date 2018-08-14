@@ -1,0 +1,26 @@
+{
+  "name": "statsgoon-api",
+  "version": "0.1.0",
+  "description": "Dockerized API for Statsgoon",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "statsgoon",
+    "hockey",
+    "nhl"
+  ],
+  "author": "olli iivonen / statsgoon enterprises",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "javascript-lp-solver": "^0.4.5",
+    "pg-promise": "^6.3.5",
+    "squel": "^5.12.0"
+  }
+}
