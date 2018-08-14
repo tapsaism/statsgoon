@@ -1,9 +1,5 @@
 .PHONY: run
 
-build-front:
-	echo Building statsgoon-front
-	sh /Users/olliiivonen/Dabblings/statsgoon/statsgoon-front/build-to-local.sh
-
 run:
 	docker-compose -f docker-compose.yml up -d
 	@echo statsgoon api and front running
