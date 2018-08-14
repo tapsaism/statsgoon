@@ -1,6 +1,6 @@
 .PHONY: run
 
-build:
+build-front:
 	echo Building statsgoon-front
 	sh /Users/olliiivonen/Dabblings/statsgoon/statsgoon-front/build-to-local.sh
 

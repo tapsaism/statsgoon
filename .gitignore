@@ -1,8 +1,8 @@
 node_modules/
 .DS_store
-*.sh
 package-lock.json
 temp/
+*.sh
 *.zip
 build/
 public/
