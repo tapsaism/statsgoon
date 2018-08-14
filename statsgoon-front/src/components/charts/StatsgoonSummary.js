@@ -22,12 +22,11 @@ export default class StatsgoonSummary extends React.Component {
   }
 
   addRow = (data) => {
-    console.log(data)
     return (
-      <Table.Row>
+      <Table.Row key={data.name}>
         <Table.Cell><Statistic size='mini' value={data.team_acronym} /></Table.Cell>
         <Table.Cell><Statistic size='mini' value={data.playername} /></Table.Cell>
-        <Table.Cell><Statistic color={data.line === null ? 'red' : ''} size='mini' value={data.line === null ? 'N/A' : data.line + '.'} /></Table.Cell>
+        <Table.Cell><Statistic color={data.line === null ? 'red' : 'black'} size='mini' value={data.line === null ? 'N/A' : data.line + '.'} /></Table.Cell>
         <Table.Cell><Statistic size='mini' value={data.plays_pp === 1 ? 'Yes' : 'No'} /></Table.Cell>
         <Table.Cell><Statistic size='mini' value={data.plays_pp === 1 ? data.pp_unit+'.' : 'N/A'} /></Table.Cell>
         <Table.Cell><Statistic size='mini' value={data.value} /></Table.Cell>

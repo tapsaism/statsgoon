@@ -27,11 +27,11 @@ module.exports.scrapeGameStats = (html) => {
 
   const gameInfo = parseGameInfo(title);
 
-  console.log(title)
-
   rawhtml('tr').map(index => {
 
     let tr = rawhtml('tr')[index]
+    let team = tr.parent.parent.parent.attribs.id.substring(4,7)
+
     let dataType = rawhtml(tr).attr('class') ? rawhtml(tr).attr('class') : 'general'
 
     tr.children.forEach((element,i) => {
@@ -40,7 +40,7 @@ module.exports.scrapeGameStats = (html) => {
         playerId = rawhtml(element).find('a').attr('href')
       }
       else if (rawhtml(element).attr('data-stat')){
-        let row = title.concat('|',gameInfo.date,'|',gameInfo.home,'|',gameInfo.away,'|',dataType,'|',playerId,'|',player,'|', rawhtml(element).attr('data-stat'),'|', rawhtml(element).html())
+        let row = title.concat('|',gameInfo.date,'|',gameInfo.home,'|',gameInfo.away,'|',dataType,'|',playerId,'|',team,'|',player,'|', rawhtml(element).attr('data-stat'),'|', rawhtml(element).html())
         data += row + '\n'
       }
     })
