@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+    statsgoon-api:
+        image: statsgoon/docker-api:latest
+        restart: always
+        ports:
+          - 3000:3000
+
+    webserver:
+        image: nginx-minimal:latest
+        restart: always
+        depends_on:
+            - statsgoon-api
+        volumes:
+            - ./www/:/www-data/
+        ports:
+          - 8080:80
