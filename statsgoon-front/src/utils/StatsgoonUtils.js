@@ -41,6 +41,8 @@ const parsePlayers = (solverData) => {
 
 const parseTeams = (teamData) => {
 
+  console.log(teamData)
+
   let teams = teamData.map(data => {
     let desc = data.team.concat(' - ', data.games,' - ', data.home_games, ' - ', data.away_games)
     return {key: data.team, text: desc, value: data.team}

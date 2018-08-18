@@ -1,6 +1,6 @@
-CREATE MATERIALIZED VIEW api.team_games_left
+--CREATE MATERIALIZED VIEW api.team_games_left
 
-AS
+--AS
 
 WITH current_period AS (
          SELECT d_hockeygm_period.season,
@@ -22,4 +22,7 @@ WITH current_period AS (
   WHERE sched.date >= 'now'::text::date
   
   GROUP BY team
+  
+  --HAVING SUM(sched.game) > 0
+  
   ORDER BY GAMES DESC, team

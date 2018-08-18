@@ -10,7 +10,7 @@ import thunk from 'redux-thunk'
 import reducer from './reducers/index'
 import Statsgoon from './components/statsgoonMain/StatsgoonMainContainer';
 
-amplify.configure(aws_exports)
+//amplify.configure(aws_exports)
 
 const store = createStore(reducer,applyMiddleware(thunk))
 

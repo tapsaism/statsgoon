@@ -96,6 +96,7 @@ SELECT DISTINCT staging.hockeygm_stats_all.team,
             WHEN team::text = 'Washington'::text THEN 'Washington Capitals'::text
             WHEN team::text = 'Winnipeg'::text THEN 'Winnipeg Jets'::text
             ELSE NULL::text
-        END AS team_long_name
+        END AS team_long_name,
+        DENSE_RANK() OVER (ORDER BY team::text) AS team_number
    FROM staging.hockeygm_stats_all
   WHERE staging.hockeygm_stats_all.team IS NOT NULL;
