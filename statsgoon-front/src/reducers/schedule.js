@@ -3,8 +3,10 @@ import Utils from '../utils/StatsgoonUtils'
 const initialState =
   {
     teamSchedules: [],
-    rangeDefaultValue: [Utils.dateDiff(new Date('2017-10-04'), new Date()), Utils.periodEnd()],
-    scheduleLoading: 'active'
+    rangeDefaultValue: [Utils.dateDiff(new Date('2018-10-04'), new Date()), Utils.periodEnd()],
+    scheduleLoading: 'active',
+    scheduleToday: [],
+    scheduleTodayStats: []
   }
 
 const schedule = (state = initialState, action) => {
@@ -19,11 +21,16 @@ const schedule = (state = initialState, action) => {
         ...state,
         scheduleLoading: action.loading
       }
-      case 'SET_RANGE':
-        return {
-          ...state,
-          rangeDefaultValue: action.range
-        }
+    case 'SET_RANGE':
+      return {
+        ...state,
+        rangeDefaultValue: action.range
+      }
+    case 'GET_SCHEDULE_TODAY':
+      return {
+        ...state,
+        scheduleToday: action.scheduleTodayData
+      }
     default:
       return {
         ...state

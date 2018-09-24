@@ -40,9 +40,6 @@ const parsePlayers = (solverData) => {
 }
 
 const parseTeams = (teamData) => {
-
-  console.log(teamData)
-
   let teams = teamData.map(data => {
     let desc = data.team.concat(' - ', data.games,' - ', data.home_games, ' - ', data.away_games)
     return {key: data.team, text: desc, value: data.team}
@@ -52,7 +49,7 @@ const parseTeams = (teamData) => {
 }
 
 const addDays = (days) => {
-  let dat = new Date('2017-10-04')
+  let dat = new Date('2018-10-04')
 
   dat.setDate(dat.getDate() + days)
 
@@ -64,12 +61,12 @@ const dateDiff = (firstDate, secondDate) => {
 }
 
 const periodEnd = () => {
-  if(new Date() <= new Date('2017-10-29')) return 25
-  if(new Date() <= new Date('2017-12-10')) return 67
-  if(new Date() <= new Date('2018-01-25')) return 113
-  if(new Date() <= new Date('2018-03-04')) return 151
-  if(new Date() <= new Date('2018-04-08')) return 185
-  if(new Date() <= new Date('2018-06-30')) return 240
+  if(new Date() <= new Date('2018-10-29')) return 25
+  if(new Date() <= new Date('2018-12-10')) return 67
+  if(new Date() <= new Date('2019-01-25')) return 113
+  if(new Date() <= new Date('2019-03-04')) return 151
+  if(new Date() <= new Date('2019-04-08')) return 185
+  if(new Date() <= new Date('2019-06-30')) return 240
 }
 
 const getPlayerDropdownElement = (player) => ({key: player.team +'-'+ player.name, text: player.team +'-'+ player.name, value: player.name})

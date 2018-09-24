@@ -138,14 +138,14 @@ export function getChartData(params) {
 
 export function runSolverAndGetChartData() {
   return (dispatch, getState) => {
-    return dispatch(runSolver()).then(() => {
-      const chartParams = {
-        filter: [
-          Utils.parsePlayers(getState().solver.solverResults),
-          getState().solver.selectedSeason
-        ]
-      }
-      return dispatch(getChartData(chartParams))
+    return dispatch(runSolver())
+            .then(() => {
+              const chartParams = {
+              filter: [
+                  Utils.parsePlayers(getState().solver.solverResults),
+                  getState().solver.selectedSeason
+                ]}
+            return dispatch(getChartData(chartParams))
     })
   }
 }

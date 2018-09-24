@@ -11,7 +11,7 @@ SELECT DISTINCT staging.hockeygm_stats_all.team,
             WHEN team::text = 'Carolina'::text THEN 'CAR'::text
             WHEN team::text = 'Calgary'::text THEN 'CGY'::text
             WHEN team::text = 'Chicago'::text THEN 'CHI'::text
-            WHEN team::text = 'Columbus'::text THEN 'CJB'::text
+            WHEN team::text = 'Columbus'::text THEN 'CBJ'::text
             WHEN team::text = 'Colorado'::text THEN 'COL'::text
             WHEN team::text = 'Dallas'::text THEN 'DAL'::text
             WHEN team::text = 'Detroit'::text THEN 'DET'::text
@@ -19,8 +19,8 @@ SELECT DISTINCT staging.hockeygm_stats_all.team,
             WHEN team::text = 'Florida'::text THEN 'FLA'::text
             WHEN team::text = 'Los Angeles'::text THEN 'LAK'::text
             WHEN team::text = 'Minnesota'::text THEN 'MIN'::text
-            WHEN team::text = 'Montreal'::text THEN 'MON'::text
-            WHEN team::text = 'Nashville'::text THEN 'NAS'::text
+            WHEN team::text = 'Montreal'::text THEN 'MTL'::text
+            WHEN team::text = 'Nashville'::text THEN 'NSH'::text
             WHEN team::text = 'New Jersey'::text THEN 'NJD'::text
             WHEN team::text = 'NY Islanders'::text THEN 'NYI'::text
             WHEN team::text = 'NY Rangers'::text THEN 'NYR'::text

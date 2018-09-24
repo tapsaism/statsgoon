@@ -63,7 +63,6 @@ export function getTeamsWithPoints(all,goalies,dmen,fwds) {
   )
 }
 
-
 export function updateSelectedTeams(teams) {
   return {
     type: UPDATE_SELECTED_TEAMS,

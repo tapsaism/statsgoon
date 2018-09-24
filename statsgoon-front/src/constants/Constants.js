@@ -45,6 +45,7 @@ const constants = {
   },
 
   seasons : [
+    {text: '2018-2019', value: '2018-2019'},
     {text: '2017-2018', value: '2017-2018'},
     {text: '2016-2017', value: '2016-2017'}
   ],
