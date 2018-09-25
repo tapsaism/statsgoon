@@ -61,11 +61,11 @@ const dateDiff = (firstDate, secondDate) => {
 }
 
 const periodEnd = () => {
-  if(new Date() <= new Date('2018-10-29')) return 25
-  if(new Date() <= new Date('2018-12-10')) return 67
-  if(new Date() <= new Date('2019-01-25')) return 113
-  if(new Date() <= new Date('2019-03-04')) return 151
-  if(new Date() <= new Date('2019-04-08')) return 185
+  if(new Date() <= new Date('2018-10-28')) return 24
+  if(new Date() <= new Date('2018-12-09')) return 66
+  if(new Date() <= new Date('2019-01-23')) return 111
+  if(new Date() <= new Date('2019-03-03')) return 150
+  if(new Date() <= new Date('2019-04-06')) return 184
   if(new Date() <= new Date('2019-06-30')) return 240
 }
 
