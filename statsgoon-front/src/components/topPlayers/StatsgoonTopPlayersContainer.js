@@ -15,10 +15,10 @@ class StatsgoonTopPlayersContainer extends React.Component {
     if (this.props.players.topPlayersAllPositions.length === 0) {
 
       let paramsArray = [
-        this.getFilter("2017-2018",["GOA","DEF","FWD"],Constants.teams),
-        this.getFilter("2017-2018",["GOA"],Constants.teams),
-        this.getFilter("2017-2018",["DEF"],Constants.teams),
-        this.getFilter("2017-2018",["FWD"],Constants.teams)
+        this.getFilter("2018-2019",["GOA","DEF","FWD"],Constants.teams),
+        this.getFilter("2018-2019",["GOA"],Constants.teams),
+        this.getFilter("2018-2019",["DEF"],Constants.teams),
+        this.getFilter("2018-2019",["FWD"],Constants.teams)
       ]
       this.props.actions.loadTopPlayersByTeam(paramsArray)
     }
@@ -33,10 +33,10 @@ class StatsgoonTopPlayersContainer extends React.Component {
                   : this.props.teams.selectedTeams
 
     let paramsArray = [
-      this.getFilter("2017-2018",["GOA","DEF","FWD"],teams),
-      this.getFilter("2017-2018",["GOA"],teams),
-      this.getFilter("2017-2018",["DEF"],teams),
-      this.getFilter("2017-2018",["FWD"],teams)
+      this.getFilter("2018-2019",["GOA","DEF","FWD"],teams),
+      this.getFilter("2018-2019",["GOA"],teams),
+      this.getFilter("2018-2019",["DEF"],teams),
+      this.getFilter("2018-2019",["FWD"],teams)
     ]
 
     this.props.actions.loadTopPlayersByTeam(paramsArray)

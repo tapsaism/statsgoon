@@ -104,6 +104,7 @@ export function runSolver() {
                   : getState().teams.selectedTeams
 
     let solverParams = {
+      "filter":{
           "teams": teams,
           "measure":getState().solver.selectedMeasure,
           "def": getState().solver.dmenAmount,
@@ -112,9 +113,11 @@ export function runSolver() {
           "value": getState().solver.teamValue.replace(/\s/g,''),
           "season": getState().solver.selectedSeason
     }
+  }
 
     return Axios.post(Constants.solverApiUrl, solverParams)
       .then((response) => {
+        console.log(response.data)
         dispatch(updateSolverResults(response.data))
         dispatch(solverLoading('disabled',''))
     })
@@ -142,9 +145,10 @@ export function runSolverAndGetChartData() {
             .then(() => {
               const chartParams = {
               filter: [
-                  Utils.parsePlayers(getState().solver.solverResults),
+                  Utils.parsePlayers(getState().solver.solverResults.body),
                   getState().solver.selectedSeason
-                ]}
+                ]
+              }
             return dispatch(getChartData(chartParams))
     })
   }

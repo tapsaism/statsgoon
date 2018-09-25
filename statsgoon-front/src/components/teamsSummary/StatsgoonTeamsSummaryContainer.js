@@ -13,10 +13,10 @@ class StatsgoonTeamsSummaryContainer extends React.Component {
     if (this.props.teams.teamPointsAllPositions.length === 0) {
 
       let paramsArray = [
-        this.getFilter("2017-2018",["GOA","DEF","FWD"]),
-        this.getFilter("2017-2018",["GOA"]),
-        this.getFilter("2017-2018",["DEF"]),
-        this.getFilter("2017-2018",["FWD"])
+        this.getFilter("2018-2019",["GOA","DEF","FWD"]),
+        this.getFilter("2018-2019",["GOA"]),
+        this.getFilter("2018-2019",["DEF"]),
+        this.getFilter("2018-2019",["FWD"])
       ]
       this.props.actions.loadTeamsWithPoints(paramsArray)
     }

@@ -55,12 +55,13 @@ module.exports.runSolver = (req, res) => {
 
     hockeySolver.solve(modelConfig, (result) => {
       console.info("Success")
+      console.info(result)
       let response = {
         "statusCode": 200,
         "headers": {
           "Access-Control-Allow-Origin": "*"
         },
-        "body": data
+        "body": result
       }
       return res.send(response)
     })
