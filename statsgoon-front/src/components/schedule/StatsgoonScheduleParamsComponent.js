@@ -13,7 +13,7 @@ const Range = Slider.createSliderWithTooltip(Slider.Range)
       <div>
         <Range
           step={1}
-          min={1}
+          min={0}
           max={240}
           marks={Constants.marks}
           defaultValue={props.rangeDefaultValue}
