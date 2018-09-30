@@ -72,11 +72,14 @@ const periodEnd = () => {
 const getPlayerDropdownElement = (player) => ({key: player.team +'-'+ player.name, text: player.team +'-'+ player.name, value: player.name})
 
 const parsePlayerData = (playerData, position) => {
+
+  if(position) playerData = playerData.filter(player => player.position === position)
+
   return playerData
-          .filter(player => player.position === position)
           .map(player => getPlayerDropdownElement(player))
           .sort(dynamicSort('text'))
 }
+
 
 export default {
   parseDate,

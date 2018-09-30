@@ -22,7 +22,7 @@ const players = (state = initialState, action) => {
     case 'GET_PLAYERS_ALL_POSITIONS':
       return {
           ...state,
-          allPlayers: action.playerData,
+          allPlayers: Utils.parsePlayerData(action.playerData),
           goalies: Utils.parsePlayerData(action.playerData, 'GOA'),
           dmen: Utils.parsePlayerData(action.playerData, 'DEF'),
           forwards: Utils.parsePlayerData(action.playerData, 'FWD')

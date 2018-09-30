@@ -13,7 +13,8 @@ const initialState =
       latestStats: [],
       gamesLeft: []
     },
-    loaderDescription: ''
+    loaderDescription: '',
+    excludedPlayers: []
   }
 
 const solver = (state = initialState, action) => {
@@ -47,6 +48,12 @@ const solver = (state = initialState, action) => {
         return {
             ...state,
             teamValue: action.teamValue
+        }
+      case 'UPDATE_EXCLUDED_PLAYERS':
+        console.log(action)
+        return {
+            ...state,
+            excludedPlayers: action.excludedPlayers
         }
       case 'LOADER_STATUS':
         return {

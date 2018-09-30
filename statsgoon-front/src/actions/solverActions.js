@@ -11,6 +11,16 @@ const UPDATE_TEAM_VALUE = 'UPDATE_TEAM_VALUE'
 const LOADER_STATUS = 'LOADER_STATUS'
 const UPDATE_SOLVER_RESULTS = 'UPDATE_SOLVER_RESULTS'
 const UPDATE_CHART_DATA = 'UPDATE_CHART_DATA'
+const UPDATE_EXCLUDED_PLAYERS = 'UPDATE_EXCLUDED_PLAYERS'
+
+export function updateExcludedPlayers(players) {
+  return (
+    {
+      type: UPDATE_EXCLUDED_PLAYERS,
+      excludedPlayers: players
+    }
+  )
+}
 
 export function updateSeason(season) {
   return (
@@ -99,13 +109,22 @@ export function runSolver() {
 
     dispatch(solverLoading('active','Running Statsgoon Solver'))
 
+    console.log(getState().solver.excludedPlayers)
+
     let teams = getState().teams.selectedTeams[0] === 'all'
                   ? Constants.teams
                   : getState().teams.selectedTeams
 
+    let excluded = getState().solver.excludedPlayers.length === 0
+                  ? ['None']
+                  : getState().solver.excludedPlayers
+
+    console.log(excluded)
+
     let solverParams = {
       "filter":{
           "teams": teams,
+          "excluded": excluded,
           "measure":getState().solver.selectedMeasure,
           "def": getState().solver.dmenAmount,
           "fwd": getState().solver.fwdAmount,

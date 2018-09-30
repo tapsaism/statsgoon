@@ -25,8 +25,10 @@ module.exports.runSolver = (req, res) => {
 
   let queryFilter = [
     req.body.filter.teams,
-    req.body.filter.season
+    req.body.filter.season,
+    req.body.filter.excluded
   ]
+  
   let query = queries.getQueryByRequestType('/solver')
 
   console.info(query,queryFilter)

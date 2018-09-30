@@ -74,6 +74,7 @@ let queries = {
   '/solver':                       squel.select().from('api.solver_data')
                                    .where('team IN ($1:csv)')
                                    .where('season = $2')
+                                   .where('playername NOT IN ($3:csv)')
                                    .where('value is not null')
                                    .where('player is not null')
                                    .toString()
