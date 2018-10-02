@@ -12,5 +12,6 @@ class StatsgoonPlugin(AirflowPlugin):
         operators.ExtractHtmlOperator,
         operators.ParseLinesOperator,
         operators.CsvToPostgresOperator,
-        operators.ParsePlayersOperator
+        operators.ParsePlayersOperator,
+        operators.RefreshMaterializedViewOperator
     ]
