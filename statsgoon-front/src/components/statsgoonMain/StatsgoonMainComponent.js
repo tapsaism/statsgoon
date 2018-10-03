@@ -5,6 +5,7 @@ import StatsgoonSchedule from '../schedule/StatsgoonScheduleContainer'
 import StatsgoonPlayerSelector from '../selectPlayers/StatsgoonPlayerSelectorContainer'
 import StatsgoonTopPlayers from '../topPlayers/StatsgoonTopPlayersContainer'
 import StatsgoonTeamsSummary from '../teamsSummary/StatsgoonTeamsSummaryContainer'
+import StatsgoonScheduleToday from '../scheduleToday/StatsgoonScheduleTodayContainer'
 
 const StatsgoonMainComponent = (props) => {
 
@@ -19,6 +20,8 @@ const StatsgoonMainComponent = (props) => {
       return <StatsgoonTopPlayers />
     case 'teams':
       return <StatsgoonTeamsSummary />
+    case 'today':
+      return <StatsgoonScheduleToday />
     default:
       return <StatsgoonSolver />
   }

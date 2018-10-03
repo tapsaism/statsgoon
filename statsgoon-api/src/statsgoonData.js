@@ -17,6 +17,7 @@ module.exports.getData = (req, res) => {
   })
   .catch((error) => {
     console.info("Error requesting data")
+    console.error(error)
     return res.send(error)
   })
 }

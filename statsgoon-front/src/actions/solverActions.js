@@ -134,6 +134,8 @@ export function runSolver() {
     }
   }
 
+  console.log(solverParams)
+
     return Axios.post(Constants.solverApiUrl, solverParams)
       .then((response) => {
         console.log(response.data)
