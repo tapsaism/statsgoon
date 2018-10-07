@@ -1,6 +1,5 @@
 from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators.http_operator import SimpleHttpOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators import CsvToPostgresOperator
 from airflow.operators import ParsePlayersOperator
@@ -36,7 +35,7 @@ default_args = {
 dag = DAG(
     'statsgoon-daily-hgm-extract',
     default_args=default_args,
-    schedule_interval= '0 11 * * *')
+    schedule_interval= '0 8 * * *')
 
 dummy_start = DummyOperator(
     task_id='start_load',
