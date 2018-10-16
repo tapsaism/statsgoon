@@ -14,9 +14,9 @@ airflow trigger_dag --conf '{"maxLogAgeInDays":30}' airflow-log-cleanup
 
 """
 
-DAG_ID = os.path.basename(__file__).replace(".pyc", "").replace(".py", "")  # airflow-log-cleanup
-START_DATE = datetime.now() - timedelta(minutes=1)
-BASE_LOG_FOLDER = conf.get("core", "BASE_LOG_FOLDER")
+DAG_ID = os.path.basename(__file__).replace(".pyc", "").replace(".py", "")      # airflow-log-cleanup
+START_DATE = datetime.now() - timedelta(minutes=1)       # How often to Run. @daily - Once a day at Midnight
+BASE_LOG_FOLDER = conf.get("core", "BASE_LOG_FOLDER")    # How often to Run. @daily - Once a day at Midnight
 SCHEDULE_INTERVAL = "@daily"        # How often to Run. @daily - Once a day at Midnight
 DAG_OWNER_NAME = "operations"       # Who is listed as the owner of this DAG in the Airflow Web Server
 ALERT_EMAIL_ADDRESSES = []          # List of email address to send email alerts to if this job fails
