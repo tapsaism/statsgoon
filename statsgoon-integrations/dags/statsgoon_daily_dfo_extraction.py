@@ -1,6 +1,5 @@
 from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
-from airflow.operators.http_operator import SimpleHttpOperator
 from airflow.operators.subdag_operator import SubDagOperator
 from airflow.operators import ExtractHtmlOperator
 from airflow.operators import ParseLinesOperator
@@ -130,7 +129,7 @@ default_args = {
 dag = DAG(
     'statsgoon-daily-dfo-extract',
     default_args=default_args,
-    schedule_interval= '0 11 * * *',
+    schedule_interval= '0 8 * * *',
     concurrency=1)
 
 dummy_start = DummyOperator(

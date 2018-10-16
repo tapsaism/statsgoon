@@ -11,7 +11,8 @@ const gets = [
   '/team/games-left',
   '/team/schedule-current-period',
   '/team/nn',
-  '/team/forrest'
+  '/team/forrest',
+  '/schedule/today'
 ]
 
 const posts = [
@@ -20,7 +21,10 @@ const posts = [
   '/player/games-left',
   '/player/top-players',
   '/team/schedule-with-params',
-  '/team/points'
+  '/team/points',
+  '/team/results',
+  '/team/game_results',
+  '/team/last_ten_games'
 ]
 
 //ADD GETS TO ROUTER

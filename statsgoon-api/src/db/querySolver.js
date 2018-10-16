@@ -77,7 +77,25 @@ let queries = {
                                    .where('playername NOT IN ($3:csv)')
                                    .where('value is not null')
                                    .where('player is not null')
-                                   .toString()
+                                   .toString(),
+
+  '/team/results':                 squel.select().from('api.schedule_with_results')
+                                   .where('team = $1')
+                                   .where('opponent in ($2:csv)')
+                                   .order('game_date')
+                                   .toString(),
+
+  '/schedule/today':                squel.select().from('api.schedule_today')
+                                    .toString(),
+
+  '/team/game_results':             squel.select().from('api.team_game_results')
+                                    .where('team = $1')
+                                    .where('opponent = $2')
+                                    .toString(),
+
+  '/team/last_ten_games':            squel.select().from('api.team_last_ten_games')
+                                    .where('team = $1')
+                                    .toString()
 }
 
 module.exports.getQueryByRequestType = (requestType) => {

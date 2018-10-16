@@ -63,6 +63,12 @@ let queries = {
                                   .where('season = $1')
                                   .where('position IN ($2:csv)')
                                   .order('hockeygm_total', false)
+                                  .toString(),
+
+  'team/nn':                      squel.select().from('api.neural_network_data')
+                                  .toString(),
+
+  'team/forrest':                 squel.select().from('api.forrest_data')
                                   .toString()
 }
 

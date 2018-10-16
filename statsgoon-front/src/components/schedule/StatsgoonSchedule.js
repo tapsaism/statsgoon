@@ -3,7 +3,11 @@ import { Table } from 'semantic-ui-react'
 
 const getTableHeaderDates = (data) => {
 
+  console.log(data)
+
   let dates = [...new Set(data.map(game => game.date))];
+
+  console.log(dates)
 
   return dates.map(date => <Table.HeaderCell singleLine={true} width={1} key={date}>{date.substr(8,2)}</Table.HeaderCell>)
 }

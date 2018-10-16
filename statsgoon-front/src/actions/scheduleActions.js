@@ -5,6 +5,8 @@ import Utils from '../utils/StatsgoonUtils'
 const GET_SCHEDULE = 'GET_SCHEDULE'
 const UPDATE_SCHEDULE_STATUS = 'UPDATE_SCHEDULE_STATUS'
 const SET_RANGE = 'SET_RANGE'
+const GET_SCHEDULE_TODAY = 'GET_SCHEDULE_TODAY'
+const GET_TEAM_STATS = 'GET_TEAM_STATS'
 
 export function loadSchedule() {
   return(dispatch) => {
@@ -15,6 +17,27 @@ export function loadSchedule() {
         dispatch(scheduleLoadingState('disabled'))
       })
   }
+}
+
+export function loadScheduleToday() {
+  return(dispatch) => {
+    dispatch(scheduleLoadingState('active'))
+    return Axios.get(Constants.dataApiUrl+'schedule/today')
+      .then((response) => {
+        dispatch(setScheduleToday(response.data))
+        dispatch(scheduleLoadingState('disabled'))
+      })
+  }
+}
+
+export function loadTeamStats(team,opponent) {
+  return(dispatch) => {
+    let queryFilter = [team, opponent]
+    return Axios.post(Constants.dataApiUrl+'team/game_results', queryFilter)
+        .then((response) => {
+          dispatch()
+        })
+    }
 }
 
 export function loadScheduleWithParams(value) {
@@ -54,6 +77,15 @@ export function setSchedule(data) {
   )
 }
 
+export function setScheduleToday(data) {
+  return (
+    {
+      type: GET_SCHEDULE_TODAY,
+      scheduleTodayData: data
+   }
+  )
+}
+
 export function setRange(range) {
   return (
     {
@@ -61,4 +93,11 @@ export function setRange(range) {
       range: range
     }
   )
+}
+
+export function getTeamTeamStats(results) {
+  return {
+    type: GET_TEAM_STATS,
+    gameResults: results
+  }
 }
