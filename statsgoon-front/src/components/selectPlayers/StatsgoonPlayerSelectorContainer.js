@@ -37,7 +37,7 @@ class StatsgoonPlayerSelectContainer extends React.Component {
         this.props.players.selectedGoalies
           .concat(this.props.players.selectedDmen)
           .concat(this.props.players.selectedForwards),
-        '2017-2018'
+        '2018-2019'
         ]
     }
 

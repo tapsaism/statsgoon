@@ -16,7 +16,6 @@ class StatsgoonMainMenuContainer extends React.Component {
       <Button basic onClick={() => this.props.actions.updateSelectedContent('players')}>Choose players</Button>
       <Button basic onClick={() => this.props.actions.updateSelectedContent('top')}>Top players</Button>
       <Button basic onClick={() => this.props.actions.updateSelectedContent('teams')}>Teams</Button>
-      <Button basic onClick={() => this.props.actions.updateSelectedContent('today')}>Today</Button>
     </Button.Group>
     <Divider />
     </Container>

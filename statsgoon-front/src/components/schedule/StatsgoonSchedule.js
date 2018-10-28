@@ -5,7 +5,7 @@ const getTableHeaderDates = (data) => {
 
   console.log(data)
 
-  let dates = [...new Set(data.map(game => game.date))];
+  let dates = [...new Set(data.map(game => new Date(Date.parse(game.date))+1  ))];
 
   console.log(dates)
 

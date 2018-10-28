@@ -3,6 +3,7 @@ import { Card, List } from 'semantic-ui-react'
 import Axios from 'axios'
 
 import Constants from '../../constants/Constants'
+import Sparkbar from '../charts/StatsgoonSparkbar'
 
 class StatsgoonScheduleTodayStatsComponent extends React.Component {
 
@@ -74,20 +75,18 @@ class StatsgoonScheduleTodayStatsComponent extends React.Component {
   }
 
   lastTen = (data) => {
-    return (
-      <List>
-      {data.map(game => {
-        return(
-          <List.Item>{
-                      game.game_date + ' - ' +
-                      game.result + ' ' +
-                      game.opponent
-                      }
-          </List.Item>
-        )
-      })}
-      </List>
-    )
+    if (data.length > 0) {
+      return (
+        <List>
+          <Sparkbar
+            data={data}
+            x='game_order'
+            y='goals'
+          />
+        </List>
+      )
+    }
+
   }
 
   render = () => {

@@ -15,7 +15,7 @@ urls = list(filter(lambda game: game['date'] == yesterday_formated, schedule))
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2018, 10, 07),
+    'start_date': datetime(2018, 10, 7),
     'email': ['internetdata@internetdata.com'],
     'email_on_failure': False,
     'email_on_retry': False,
