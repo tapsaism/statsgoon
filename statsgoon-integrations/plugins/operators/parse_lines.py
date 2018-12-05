@@ -42,11 +42,14 @@ class ParseLinesOperator(BaseOperator):
         delimited_file = ''
 
         for id in ids:
-         elem = soup.find('td', id=id)
-         elem_val = elem.find('span', {"class":"player-name"}).text
-         print(elem_val)
-         line = timestamp + '|' + self.source_file_name + '|' + id + '|' + elem_val
-         delimited_file += line + '\n'
+         try:
+          elem = soup.find('td', id=id)
+          elem_val = elem.find('span', {"class":"player-name"}).text
+          print(elem_val)
+          line = timestamp + '|' + self.source_file_name + '|' + id + '|' + elem_val
+          delimited_file += line + '\n'
+         except:
+          print('No player found')
 
         with open(self.target_file_name, 'w') as file:
             file.write(str(delimited_file.rstrip()))

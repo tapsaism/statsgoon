@@ -27,7 +27,7 @@ default_args = {
 dag = DAG(
     'statsgoon-daily-hrf-extract',
     default_args=default_args,
-    schedule_interval= '0 13 * * *',
+    schedule_interval= '0 16 * * *',
     concurrency=1)
 
 dummy_start = DummyOperator(
