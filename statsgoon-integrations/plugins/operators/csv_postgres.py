@@ -36,11 +36,12 @@ class CsvToPostgresOperator(BaseOperator):
         tuples = []
 
         for line in lines:
-            line_with_default = timestamp + '|' + self.source_file_name + '|' + line
-            vals = list(line_with_default.split('|'))
-            str_vals = map(lambda x: str(x),vals)
-            tuples.append(str_vals)
+            if len(line) > 0:
+                line_with_default = timestamp + '|' + self.source_file_name + '|' + line
+                vals = list(line_with_default.split('|'))
+                str_vals = map(lambda x: str(x),vals)
+                tuples.append(str_vals)
 
         self.log.info("Inserting %s records to %s" % (str(len(tuples)), self.target_table))
 
-        pg.insert_rows(self.target_table,tuples)
+        pg.insert_rows(self.target_table, tuples, commit_every=1000)

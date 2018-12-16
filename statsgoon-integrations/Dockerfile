@@ -62,6 +62,7 @@ RUN set -ex \
     && pip install apache-airflow[crypto,postgres,jdbc,mysql,s3,password]==$AIRFLOW_VERSION \
     && pip install bs4 \
     && pip install psycopg2-binary \
+    && pip install sklearn \
     && apt-get purge --auto-remove -yqq $buildDeps \
     && apt-get autoremove -yqq --purge \
     && apt-get clean \

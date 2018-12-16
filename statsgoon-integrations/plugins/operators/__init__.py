@@ -5,6 +5,8 @@ from operators.csv_postgres import CsvToPostgresOperator
 from operators.parse_players import ParsePlayersOperator
 from operators.parse_stats import ParseStatsOperator
 from operators.refresh_matview import RefreshMaterializedViewOperator
+from operators.cluster_fuck import ClusterFuck
+from operators.linear_regression import LinearRegressionOperator
 
 __all__ = [
     'ApiToPostgresOperator',
@@ -13,5 +15,7 @@ __all__ = [
     'CsvToPostgresOperator',
     'ParsePlayersOperator',
     'RefreshMaterializedViewOperator',
-    'ParseStatsOperator'
+    'ParseStatsOperator',
+    'ClusterFuck',
+    'LinearRegressionOperator'
 ]
