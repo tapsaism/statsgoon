@@ -1,6 +1,6 @@
 ### Internetdata Integrations Project
 
-## www.internetdata.net
+## statsgoon.net
 
 ## requirements
 
