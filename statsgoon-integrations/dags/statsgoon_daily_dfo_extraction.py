@@ -129,7 +129,7 @@ default_args = {
 dag = DAG(
     'statsgoon-daily-dfo-extract',
     default_args=default_args,
-    schedule_interval= '0 8 * * *',
+    schedule_interval= '0 9 * * *',
     concurrency=1)
 
 dummy_start = DummyOperator(

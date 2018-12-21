@@ -30,7 +30,7 @@ default_args = {
 dag = DAG(
     'statsgoon-daily-view-refresh',
     default_args=default_args,
-    schedule_interval= '0 9 * * *',
+    schedule_interval= '0 10 * * *',
     concurrency=1)
 
 dummy_start = DummyOperator(

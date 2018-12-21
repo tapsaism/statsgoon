@@ -10,7 +10,7 @@ now = datetime.now()
 cur_date = now.strftime("%Y-%m-%d")
 
 html_file_name = cur_date + '-hgm-players.html'
-cmd_command = 'curl -v --cookie "hgmsticky=ffc84514a3e421407ac64191cc2285a701ac62e49996eaf54db114d4" https://www.hockeygm.fi/team/search-players >> /usr/local/airflow/temp/html/'
+cmd_command = 'curl -v --cookie "hgmsticky=ffc84514a36c414b58fc97e66c7522debd38e01424ab0c23df647d97" https://www.hockeygm.fi/team/search-players >> /usr/local/airflow/temp/html/'
 
 txt_file_name = cur_date + '-hgm-players.txt'
 
