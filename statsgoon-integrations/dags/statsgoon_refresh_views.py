@@ -41,12 +41,21 @@ dummy_end = DummyOperator(
     task_id='end_load',
     dag=dag)
 
+prev_task = None
+
 for view in views:
     refresh_view = RefreshMaterializedViewOperator(
        task_id='refresh_view_' + view,
        view_name=view,
        pg_conn_id='postgres_statsgoon',
        dag=dag
-    )
+     )
 
-    dummy_start >> refresh_view >> dummy_end
+    if prev_task:
+        prev_task >> refresh_view
+        prev_task = refresh_view
+    else:
+        dummy_start >> refresh_view
+        prev_task = refresh_view
+        
+prev_task >> dummy_end
